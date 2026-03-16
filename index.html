@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stéphane HERVÉ — Conception Architecturale & Univers Visuels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bleu: #1a2b4a;
+    --bleu-moyen: #2d4370;
+    --bleu-clair: #3d5a8a;
+    --beige: #c8b89a;
+    --beige-clair: #e8ddd0;
+    --beige-pale: #f5f0ea;
+    --blanc: #faf8f5;
+    --texte: #2a2420;
+    --texte-leger: #6b5e52;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--blanc);
+    color: var(--texte);
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: var(--bleu);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    height: 72px;
+    border-bottom: 1px solid rgba(200,184,154,0.25);
+  }
+
+  .logo-zone {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-placeholder {
+    width: 48px;
+    height: 48px;
+    background: rgba(200,184,154,0.15);
+    border: 1.5px solid var(--beige);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--beige);
+    letter-spacing: 1px;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .logo-text .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--blanc);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .logo-text .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--beige);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  nav {
+    display: flex;
+    gap: 0;
+  }
+
+  nav a {
+    color: var(--beige-clair);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0 20px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+    border-bottom: 2px solid transparent;
+    position: relative;
+  }
+
+  nav a:hover, nav a.active {
+    color: var(--beige);
+    border-bottom-color: var(--beige);
+  }
+
+  /* ─── SOUS-NAV PRESTATIONS ─── */
+  .subnav {
+    display: none;
+    position: fixed;
+    top: 72px; left: 0; right: 0;
+    z-index: 999;
+    background: var(--bleu-moyen);
+    border-bottom: 1px solid rgba(200,184,154,0.2);
+    padding: 0 3rem;
+  }
+
+  .subnav.visible {
+    display: flex;
+  }
+
+  .subnav a {
+    color: var(--beige-clair);
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 0 24px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+    border-bottom: 2px solid transparent;
+  }
+
+  .subnav a:hover, .subnav a.active {
+    color: var(--beige);
+    border-bottom-color: var(--beige);
+  }
+
+  /* ─── SOUS-NAV UNIVERS VISUELS ─── */
+  .subnav-visuels {
+    display: none;
+    position: fixed;
+    top: 116px; left: 0; right: 0;
+    z-index: 998;
+    background: #c8b89a22;
+    background: rgba(45,67,112,0.85);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid rgba(200,184,154,0.15);
+    padding: 0 3rem;
+  }
+
+  .subnav-visuels.visible { display: flex; }
+
+  .subnav-visuels a {
+    color: var(--beige-clair);
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 0 24px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+    border-bottom: 2px solid transparent;
+  }
+
+  .subnav-visuels a:hover, .subnav-visuels a.active {
+    color: var(--beige);
+    border-bottom-color: var(--beige);
+  }
+
+  /* ─── PAGES ─── */
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding-top: 72px;
+  }
+
+  .page.active { display: block; }
+
+  /* ─── HERO ACCUEIL ─── */
+  .hero {
+    height: calc(100vh - 72px);
+    background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu-moyen) 60%, var(--bleu-clair) 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b89a' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 8rem;
+    max-width: 800px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--beige);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 300;
+    color: var(--blanc);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--beige);
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--beige-clair);
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    max-width: 500px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 36px;
+    border: 1px solid var(--beige);
+    color: var(--beige);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    transition: all 0.4s;
+    cursor: pointer;
+    background: none;
+  }
+
+  .hero-cta:hover {
+    background: var(--beige);
+    color: var(--bleu);
+  }
+
+  .hero-deco {
+    position: absolute;
+    right: 6%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    height: 420px;
+    border: 1px solid rgba(200,184,154,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-deco::before {
+    content: '';
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border: 1px solid rgba(200,184,154,0.1);
+    border-radius: 50%;
+  }
+
+  .hero-deco-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 90px;
+    font-weight: 300;
+    color: rgba(200,184,154,0.08);
+    letter-spacing: -4px;
+    font-style: italic;
+  }
+
+  /* ─── SLIDES GRID ─── */
+  .slides-section {
+    padding: 6rem 4rem;
+    background: var(--blanc);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--beige-clair);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--bleu);
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--texte-leger);
+  }
+
+  .slides-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .slide-card {
+    aspect-ratio: 16/9;
+    background: var(--beige-pale);
+    border: 1px solid var(--beige-clair);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.4s, box-shadow 0.4s;
+    cursor: pointer;
+  }
+
+  .slide-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(26,43,74,0.12);
+  }
+
+  .slide-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .slide-card .slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,43,74,0.6) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .slide-card:hover .slide-overlay { opacity: 1; }
+
+  /* ─── INTRO BLOCK ─── */
+  .intro-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 400px;
+    margin: 0 4rem 4rem;
+  }
+
+  .intro-left {
+    background: var(--bleu);
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .intro-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--blanc);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .intro-left h2 em {
+    font-style: italic;
+    color: var(--beige);
+  }
+
+  .intro-left p {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--beige-clair);
+    line-height: 1.8;
+  }
+
+  .intro-right {
+    background: var(--beige-pale);
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .etape-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .etape-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--beige);
+    line-height: 1;
+    min-width: 40px;
+  }
+
+  .etape-content h4 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--bleu);
+    margin-bottom: 4px;
+  }
+
+  .etape-content p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texte-leger);
+    line-height: 1.6;
+  }
+
+  /* ─── PRESTATION SOUS-PAGE ─── */
+  .prestation-page {
+    display: none;
+    padding-top: 116px;
+  }
+
+  .prestation-page.active { display: block; }
+
+  /* ─── QUI SUIS-JE ─── */
+  .qui-hero {
+    height: 50vh;
+    background: var(--bleu);
+    display: flex;
+    align-items: center;
+    padding: 0 8rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .qui-hero::after {
+    content: 'SH';
+    position: absolute;
+    right: 6%;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px;
+    font-weight: 300;
+    color: rgba(200,184,154,0.06);
+    font-style: italic;
+    line-height: 1;
+  }
+
+  .qui-hero-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--blanc);
+    margin-bottom: 1rem;
+  }
+
+  .qui-hero-content p {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--beige);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .qui-body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+  }
+
+  .qui-photo {
+    background: var(--beige-pale);
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .photo-placeholder {
+    width: 200px;
+    height: 200px;
+    background: var(--beige-clair);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 60px;
+    font-weight: 300;
+    color: var(--bleu);
+    font-style: italic;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .contact-info span {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texte-leger);
+    letter-spacing: 0.5px;
+  }
+
+  .contact-info a {
+    color: var(--bleu-moyen);
+    text-decoration: none;
+  }
+
+  .qui-texte {
+    padding: 5rem;
+    background: var(--blanc);
+  }
+
+  .qui-texte h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--bleu);
+    margin-bottom: 2rem;
+  }
+
+  .qui-texte p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--texte);
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .qui-texte strong {
+    font-weight: 500;
+    color: var(--bleu-moyen);
+  }
+
+  /* ─── OFFRE TARIFAIRE ─── */
+  .offre-hero {
+    background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu-moyen) 100%);
+    padding: 6rem 8rem;
+    text-align: center;
+  }
+
+  .offre-hero h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--blanc);
+    margin-bottom: 1rem;
+  }
+
+  .offre-hero p {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--beige-clair);
+    letter-spacing: 1px;
+  }
+
+  .offre-body {
+    padding: 5rem 8rem;
+    background: var(--beige-pale);
+  }
+
+  .pdf-download-block {
+    background: var(--blanc);
+    border: 1px solid var(--beige-clair);
+    padding: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .pdf-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--bleu);
+    margin-bottom: 0.5rem;
+  }
+
+  .pdf-info p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texte-leger);
+    line-height: 1.6;
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 36px;
+    background: var(--bleu);
+    color: var(--beige-clair);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-download:hover { background: var(--bleu-moyen); }
+
+  /* ─── CONTACT ─── */
+  .contact-hero {
+    background: var(--bleu);
+    padding: 5rem 8rem;
+  }
+
+  .contact-hero h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--blanc);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-hero p {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--beige);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .contact-body {
+    padding: 5rem 8rem;
+    background: var(--beige-pale);
+  }
+
+  .contact-form-wrap {
+    max-width: 860px;
+    background: var(--blanc);
+    border: 1px solid var(--beige-clair);
+    padding: 4rem;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-field label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--bleu);
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    padding: 12px 16px;
+    border: 1px solid var(--beige-clair);
+    background: var(--blanc);
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--texte);
+    transition: border-color 0.3s;
+    outline: none;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--bleu-moyen);
+  }
+
+  .form-field.full { grid-column: 1 / -1; }
+
+  .form-field textarea { resize: vertical; min-height: 120px; }
+
+  .btn-submit {
+    margin-top: 1rem;
+    padding: 16px 48px;
+    background: var(--bleu);
+    color: var(--beige-clair);
+    border: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .btn-submit:hover { background: var(--bleu-moyen); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bleu);
+    padding: 3rem 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(200,184,154,0.15);
+  }
+
+  footer .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--blanc);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  footer .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--beige);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  footer .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  footer .footer-links a {
+    color: var(--beige-clair);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    cursor: pointer;
+  }
+
+  footer .footer-links a:hover { opacity: 1; }
+
+  /* ─── ZONE D'INTERVENTION ─── */
+  .zone-banner {
+    background: var(--bleu-moyen);
+    padding: 2rem 8rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .zone-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .zone-dot {
+    width: 8px; height: 8px;
+    background: var(--beige);
+    border-radius: 50%;
+  }
+
+  .zone-text {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--beige-clair);
+    letter-spacing: 1px;
+  }
+
+  .zone-text strong {
+    color: var(--beige);
+    font-weight: 500;
+  }
+
+  /* ─── RÉALISATIONS ─── */
+  .realisations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 4rem;
+  }
+
+  .realisation-card {
+    background: var(--beige-pale);
+    border: 1px solid var(--beige-clair);
+    overflow: hidden;
+  }
+
+  .realisation-img {
+    aspect-ratio: 16/10;
+    background: var(--beige-clair);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--texte-leger);
+    font-style: italic;
+  }
+
+  .realisation-info {
+    padding: 1.5rem 2rem;
+  }
+
+  .realisation-info h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--bleu);
+    margin-bottom: 6px;
+  }
+
+  .realisation-info p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texte-leger);
+    line-height: 1.6;
+  }
+
+  /* ─── RE2020 ─── */
+  .re2020-intro {
+    background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu-clair) 100%);
+    padding: 5rem 8rem;
+  }
+
+  .re2020-intro h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--blanc);
+    margin-bottom: 1rem;
+  }
+
+  .re2020-intro p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--beige-clair);
+    line-height: 1.7;
+    max-width: 700px;
+  }
+
+  .piliers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: var(--blanc);
+  }
+
+  .pilier-card {
+    padding: 3rem 2rem;
+    border-right: 1px solid var(--beige-clair);
+    border-bottom: 1px solid var(--beige-clair);
+  }
+
+  .pilier-card:nth-child(4n) { border-right: none; }
+
+  .pilier-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--beige);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .pilier-card h4 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--bleu);
+    margin-bottom: 8px;
+  }
+
+  .pilier-card p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texte-leger);
+    line-height: 1.6;
+  }
+
+  /* Notif slide info */
+  .slide-info-note {
+    background: var(--beige-pale);
+    border-left: 3px solid var(--beige);
+    padding: 1rem 2rem;
+    margin: 0 4rem 2rem;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texte-leger);
+    font-style: italic;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header>
+  <div class="logo-zone" onclick="showPage('accueil')">
+    <img src="images/index_b88e350d.jpg" alt="AcA - Atelier Conception Architecturale" style="height:56px;width:auto;object-fit:contain;">
+    <div class="logo-text">
+      <span class="name">Stéphane Hervé</span>
+      <span class="tagline">Conception Architecturale · Univers Visuels</span>
+    </div>
+  </div>
+  <nav>
+    <a href="#" onclick="showPage('accueil')" id="nav-accueil" class="active">Accueil</a>
+    <a href="#" onclick="togglePrestations()" id="nav-prestations">Prestations</a>
+    <a href="#" onclick="showPage('offre')" id="nav-offre">Offre Tarifaire</a>
+    <a href="#" onclick="showPage('qui')" id="nav-qui">Qui suis-je ?</a>
+    <a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a>
+  </nav>
+</header>
+
+<!-- ─── SOUS-NAV PRESTATIONS ─── -->
+<div class="subnav" id="subnav-prestations">
+  <a href="#" onclick="showPrestation('particulier')" id="sub-particulier">Particulier</a>
+  <a href="#" onclick="showPrestation('professionnelles')" id="sub-professionnelles">Professionnelles</a>
+  <a href="#" onclick="toggleVisuels()" id="sub-visuels">Univers Visuels</a>
+  <a href="#" onclick="showPrestation('re2020')" id="sub-re2020">RE2020</a>
+  <a href="#" onclick="showPrestation('realisations')" id="sub-realisations">Réalisations</a>
+</div>
+
+<!-- ─── SOUS-NAV UNIVERS VISUELS ─── -->
+<div class="subnav-visuels" id="subnav-visuels">
+  <a href="#" onclick="showPrestation('amenagement-pro')" id="sub-amenagement-pro">Aménagement d'espaces professionnels</a>
+  <a href="#" onclick="showPrestation('cahier-tendance')" id="sub-cahier-tendance">Cahier de Tendance</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : ACCUEIL
+══════════════════════════════════════ -->
+<div id="page-accueil" class="page active">
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Atelier Conception Architecturale</p>
+      <h1>Conception &<br><em>Expertise en</em><br>Architecture</h1>
+      <p class="hero-sub">Accompagnement sur-mesure pour particuliers et professionnels. De l'esquisse à la réalité.</p>
+      <a class="hero-cta" onclick="showPage('contact')">Parlons de votre projet →</a>
+    </div>
+    <div style="position:absolute;right:4%;top:50%;transform:translateY(-50%);width:55%;max-width:700px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+      <img src="images/index_2b63daec.jpg" style="width:100%;height:auto;display:block;">
+    </div>
+  </section>
+
+  <!-- SLIDES ACCUEIL -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;margin:3rem 4rem 0;">
+    <div style="overflow:hidden;border:1px solid var(--beige-clair);">
+      <img src="images/index_d43a3d8c.jpg" alt="Conception & Expertise en Architecture" style="width:100%;height:100%;object-fit:cover;display:block;">
+    </div>
+    <div style="overflow:hidden;border:1px solid var(--beige-clair);">
+      <img src="images/index_06c35003.jpg" alt="De l'Esquisse à la Réalité" style="width:100%;height:100%;object-fit:cover;display:block;">
+    </div>
+  </div>
+
+  <section class="slides-section" style="padding-top:1.5rem;padding-bottom:2rem;">
+    <div class="section-header">
+      <h2 class="section-title">Notre Engagement Professionnel</h2>
+    </div>
+    <div class="slides-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="slide-card" style="aspect-ratio:auto; padding:2.5rem; background:var(--bleu);">
+        <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Confiance</p>
+        <p style="font-size:14px;font-weight:300;color:var(--beige-clair);line-height:1.7;">Premier pilier garantissant la réussite de la collaboration.</p>
+      </div>
+      <div class="slide-card" style="aspect-ratio:auto; padding:2.5rem; background:var(--bleu-moyen);">
+        <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Transparence</p>
+        <p style="font-size:14px;font-weight:300;color:var(--beige-clair);line-height:1.7;">Le lien entre idées et technique pour des projets de vie réels.</p>
+      </div>
+      <div class="slide-card" style="aspect-ratio:auto; padding:2.5rem; background:var(--bleu-clair);">
+        <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Sérénité</p>
+        <p style="font-size:14px;font-weight:300;color:var(--beige-clair);line-height:1.7;">Un accompagnement fluide pour assurer la tranquillité d'esprit du client.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="footer-brand">Stéphane Hervé</div>
+      <div class="footer-tagline">Conception architecturale et création d'univers visuels</div>
+    </div>
+    <div class="footer-links">
+      <a onclick="showPage('accueil')">Accueil</a>
+      <a onclick="togglePrestations()">Prestations</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : PRESTATIONS - PARTICULIER
+══════════════════════════════════════ -->
+<div id="page-particulier" class="page">
+  <div style="background:var(--bleu);padding:5rem 8rem 3rem;">
+    <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Prestations / Particulier</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--blanc);">L'Expertise Architecturale<br><em style="font-style:italic;color:var(--beige);">sur Mesure</em></h2>
+  </div>
+
+  <div class="zone-banner">
+    <div class="zone-item"><div class="zone-dot"></div><span class="zone-text"><strong>Zone présentielle :</strong> Dép. 37, 44, 49, 85, 86</span></div>
+    <div class="zone-item"><div class="zone-dot"></div><span class="zone-text"><strong>France entière :</strong> Accompagnement complet en visioconférence</span></div>
+    <div class="zone-item"><div class="zone-dot"></div><span class="zone-text"><strong>Stéphane HERVÉ</strong> — Conception architecturale et création d'univers visuels</span></div>
+  </div>
+
+  <section class="slides-section" style="padding-top:2rem;">
+    <div class="section-header">
+      <h3 class="section-title" style="font-size:2rem;">Prestations Particuliers</h3>
+      <span class="section-subtitle">De l'esquisse à la réalité — lisez de gauche à droite</span>
+    </div>
+
+    <!-- Rangée 1 : 3 slides -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/index_db45683e.jpg" alt="L'Expertise Architecturale sur Mesure" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_e78153d8.jpg" alt="Penser votre espace" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_44e8cdd3.jpg" alt="Votre Projet Architectural Étape par Étape" style="width:100%;display:block;border-radius:2px;">
+    </div>
+
+    <!-- Rangée 2 : 3 slides -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/index_7308e8a7.jpg" alt="L'Art de Concevoir" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_06f21e9a.jpg" alt="Votre vision notre expertise" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_c5acb662.jpg" alt="Le Processus de Conception en 6 Étapes" style="width:100%;display:block;border-radius:2px;">
+    </div>
+
+    <!-- Rangée 3 : 3 slides -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+      <img src="images/index_64528585.jpg" alt="01 Recherche Foncière" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_6a52e04f.jpg" alt="02 Analyse Urbanistique" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_51412b19.jpg" alt="03 Avant-Projet Sommaire" style="width:100%;display:block;border-radius:2px;">
+    </div>
+  
+
+    <!-- Rangée 4 : slides 10-12 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;">
+      <img src="images/index_ec4651ac.jpg" alt="04 Aménagement Intérieur" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_a4ae5eb5.jpg" alt="05 Consultation Préventive" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_fa105d6a.jpg" alt="Dossier Administratif" style="width:100%;display:block;border-radius:2px;">
+    </div>
+
+    <!-- Rangée 5 : slides 13-15 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;">
+      <img src="images/index_a4ae5eb5.jpg" alt="Consultation Préventive 2" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_fa105d6a.jpg" alt="Dossier Administratif 2" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_16f91979.jpg" alt="Permis de Construire PCMI" style="width:100%;display:block;border-radius:2px;">
+    </div>
+
+    <!-- Rangée 6 : slides 16-18 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;">
+      <img src="images/index_0882f911.jpg" alt="Déclaration Préalable DP" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_8aef75a0.jpg" alt="Focus PC Insertion Environnementale" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_5ef5bdc2.jpg" alt="Plan d'Exécution" style="width:100%;display:block;border-radius:2px;">
+    </div>
+
+    <!-- Rangée 7 : slides 19-22 -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px;">
+      <img src="images/index_d9d39e3c.jpg" alt="Synthèse accompagnement" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_d4348042.jpg" alt="Sécurité Technique et Garanties" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_5f7147f5.jpg" alt="Guide Expert DP vs PC" style="width:100%;display:block;border-radius:2px;">
+      <img src="images/index_17c60eb9.jpg" alt="Au-delà du Permis Aménagement Intérieur" style="width:100%;display:block;border-radius:2px;">
+    </div>
+  </section>
+
+  <footer>
+    <div><div class="footer-brand">Stéphane Hervé</div><div class="footer-tagline">Conception architecturale et création d'univers visuels</div></div>
+    <div class="footer-links"><a onclick="showPage('accueil')">Accueil</a><a onclick="showPage('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : PRESTATIONS - PROFESSIONNELLES
+══════════════════════════════════════ -->
+<div id="page-professionnelles" class="page">
+  <div style="background:var(--bleu);padding:5rem 8rem 3rem;">
+    <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Prestations / Professionnelles</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--blanc);">Optimisez vos Projets<br><em style="font-style:italic;color:var(--beige);">L'Externalisation au Service des Pros</em></h2>
+  </div>
+
+  <section class="slides-section" style="padding-top:1.5rem;padding-bottom:2rem;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
+      <div style="background:var(--bleu);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Gain en Liberté et Efficacité</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:1rem;">
+          <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--beige);margin-top:3px;">—</span><p style="font-size:13px;font-weight:300;color:var(--beige-clair);line-height:1.6;">Gain de Temps Stratégique</p></li>
+          <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--beige);margin-top:3px;">—</span><p style="font-size:13px;font-weight:300;color:var(--beige-clair);line-height:1.6;">L'Excellence Technique Numérique</p></li>
+          <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--beige);margin-top:3px;">—</span><p style="font-size:13px;font-weight:300;color:var(--beige-clair);line-height:1.6;">Flexibilité Opérationnelle</p></li>
+          <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--beige);margin-top:3px;">—</span><p style="font-size:13px;font-weight:300;color:var(--beige-clair);line-height:1.6;">Livrables de Haute Précision</p></li>
+        </ul>
+      </div>
+      <div style="background:var(--beige-pale);padding:3rem;">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--bleu);margin-bottom:1.5rem;">Votre Parcours de Projet</h3>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="width:28px;height:28px;background:var(--bleu);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--blanc);flex-shrink:0;">1</div><p style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.5;">Faisabilité — Recherche terrain, analyse PLU, consultation préventive</p></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="width:28px;height:28px;background:var(--bleu-moyen);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--blanc);flex-shrink:0;">2</div><p style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.5;">Conception — APS / Avant-Projet Définitif (APD) / Modélisation 3D</p></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="width:28px;height:28px;background:var(--bleu-clair);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--blanc);flex-shrink:0;">3</div><p style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.5;">Administratif — Constitution et Dépôt officiel du PC ou de la DP</p></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="width:28px;height:28px;background:var(--beige);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--bleu);flex-shrink:0;">4</div><p style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.5;">Technique — Plans d'exécution détaillés</p></div>
+        </div>
+      </div>
+      <div style="background:var(--bleu-moyen);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:1.5rem;">Dossier PC Complet</h4>
+        <p style="font-size:13px;font-weight:300;color:var(--beige-clair);line-height:1.7;margin-bottom:1rem;">PCMI 1 à 8 · CERFA · Insertion paysagère · Norme RE2020</p>
+        <p style="font-size:12px;font-weight:300;color:rgba(200,184,154,0.7);font-style:italic;line-height:1.6;">Documents administratifs, insertion paysagée, détails architecturaux et fondations du projet.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div><div class="footer-brand">Stéphane Hervé</div><div class="footer-tagline">Conception architecturale et création d'univers visuels</div></div>
+    <div class="footer-links"><a onclick="showPage('accueil')">Accueil</a><a onclick="showPage('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : UNIVERS VISUELS - AMÉNAGEMENT PRO
+══════════════════════════════════════ -->
+<div id="page-amenagement-pro" class="page">
+  <div style="background:var(--bleu);padding:5rem 8rem 3rem;">
+    <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Univers Visuels / Aménagement d'Espaces Professionnels</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--blanc);">Concevoir l'espace<br><em style="font-style:italic;color:var(--beige);">comme levier de performance</em></h2>
+  </div>
+
+  <section class="slides-section" style="padding-top:1.5rem;padding-bottom:2rem;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:3rem;">
+      <div style="background:var(--beige-pale);border:1px solid var(--beige-clair);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--bleu);margin-bottom:1rem;">Prenons le temps de concevoir votre prochain espace</h4>
+        <p style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.7;margin-bottom:1.5rem;">06 47 23 24 52<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="502324352038313e3538352226357e202410373d31393c7e333f3d">[email&#160;protected]</a></p>
+        <p style="font-size:11px;font-weight:300;color:var(--texte-leger);font-style:italic;">Une nouvelle signature visuelle prête à incarner les prochains projets.</p>
+      </div>
+      <div style="background:var(--blanc);border:1px solid var(--beige-clair);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--bleu);margin-bottom:1rem;">Renouveler sans cesse les inspirations</h4>
+        <p style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.7;">Une exploration perpétuelle des matériaux bruts, textures organiques et teintes naturelles pour façonner des environnements intemporels.</p>
+      </div>
+      <div style="background:var(--beige-pale);border:1px solid var(--beige-clair);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--bleu);margin-bottom:1rem;">Penser l'espace de travail comme levier de performance</h4>
+        <p style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.7;">La création de lieux de destination (salons d'accueil, espaces coworking hybrides) favorise la concentration et la culture d'entreprise.</p>
+        <p style="font-size:12px;font-weight:500;color:var(--bleu-moyen);margin-top:1rem;">+17% d'augmentation de la productivité</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
+      <div style="background:var(--bleu);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Univers visuels pour l'événementiel international</h4>
+        <p style="font-size:13px;font-weight:300;color:var(--beige-clair);line-height:1.7;">Pilotage de l'organisation opérationnelle et scénographie pour des salons prestigieux : MAISON&OBJET à Villepinte, CHRISTMASWORLD à Francfort.</p>
+        <p style="font-size:12px;color:rgba(200,184,154,0.7);margin-top:1rem;font-style:italic;">48% des visiteurs jugent la qualité d'une entreprise directement sur la conception de son stand.</p>
+      </div>
+      <div style="background:var(--beige-pale);border:1px solid var(--beige-clair);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--bleu);margin-bottom:1rem;">L'Espace Détente : La Serre Végétale</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.8rem;">
+          <li style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.5;padding-left:1rem;border-left:2px solid var(--beige);">Une destination de décompression en marge de la zone de travail.</li>
+          <li style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.5;padding-left:1rem;border-left:2px solid var(--beige);">Ouverture sur l'Extérieur : une serre décorative baignée de lumière naturelle.</li>
+          <li style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.5;padding-left:1rem;border-left:2px solid var(--beige);">Emprunter les codes de l'hospitalité pour offrir de véritables moments de ressourcement.</li>
+        </ul>
+      </div>
+      <div style="background:var(--blanc);border:1px solid var(--beige-clair);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--bleu);margin-bottom:1rem;">Matériauthèque : L'Éloge du Naturel</h4>
+        <p style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.7;font-style:italic;">Curieux par nature et profondément créatif, j'aime explorer les matériaux et renouveler sans cesse mes inspirations.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div><div class="footer-brand">Stéphane Hervé</div><div class="footer-tagline">Conception architecturale et création d'univers visuels</div></div>
+    <div class="footer-links"><a onclick="showPage('accueil')">Accueil</a><a onclick="showPage('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : UNIVERS VISUELS - CAHIER DE TENDANCE
+══════════════════════════════════════ -->
+<div id="page-cahier-tendance" class="page">
+  <div style="background:var(--bleu);padding:5rem 8rem 3rem;">
+    <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Univers Visuels / Cahier de Tendance</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--blanc);">Matériauthèque &<br><em style="font-style:italic;color:var(--beige);">Inspirations</em></h2>
+  </div>
+
+  <section class="slides-section" style="padding-top:1.5rem;padding-bottom:2rem;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:3rem;">
+      <div style="background:var(--bleu);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:1.5rem;">L'Organique et la Terre</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.8rem;">
+          <li style="font-size:13px;font-weight:300;color:var(--beige-clair);line-height:1.6;padding-left:1rem;border-left:2px solid rgba(200,184,154,0.3);">Revenir à l'essence de la matière pour des atmosphères authentiques et poétiques.</li>
+          <li style="font-size:13px;font-weight:300;color:var(--beige-clair);line-height:1.6;padding-left:1rem;border-left:2px solid rgba(200,184,154,0.3);">La Terre Naturelle : des pots aux finitions brutes.</li>
+          <li style="font-size:13px;font-weight:300;color:var(--beige-clair);line-height:1.6;padding-left:1rem;border-left:2px solid rgba(200,184,154,0.3);">Le Bois Sec et la Cendre : intégrer les cycles de la nature.</li>
+        </ul>
+      </div>
+      <div style="background:var(--beige-pale);border:1px solid var(--beige-clair);padding:3rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--bleu);margin-bottom:0.5rem;">Minéral & Végétal Brut</h3>
+        <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--texte-leger);">Matériauthèque</p>
+      </div>
+      <div style="background:var(--blanc);border:1px solid var(--beige-clair);padding:3rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--bleu);margin-bottom:0.5rem;">Textures & Nuances</h3>
+        <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--texte-leger);">Avenir Light</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:3rem;">
+      <div style="background:var(--texte);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Thème 1 — Noir Tellurique & Gris Minéral</h4>
+        <p style="font-size:12px;font-weight:300;color:rgba(200,184,154,0.8);line-height:1.7;font-style:italic;margin-bottom:1rem;">L'ancrage par la texture et la force brute. Une sélection rigoureuse pour une authenticité absolue.</p>
+        <p style="font-size:11px;font-weight:300;color:rgba(200,184,154,0.6);line-height:1.6;">Marbre noir veiné · Roches volcaniques poreuses · Galets de rivière lisses · Charbon brut</p>
+      </div>
+      <div style="background:var(--beige-pale);border:1px solid var(--beige-clair);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--bleu);margin-bottom:1rem;">Focus — Textures & Nuances</h4>
+        <p style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.7;">Le Brut et le Flexible. Le bois naturel apporte chaleur et intemporalité, tandis que les textiles assurent le confort acoustique et la signature tactile.</p>
+        <p style="font-size:11px;font-weight:300;color:var(--texte-leger);margin-top:1rem;">Velours mat · Bois naturel ciré · Céramiques lisses</p>
+      </div>
+      <div style="background:var(--blanc);border:1px solid var(--beige-clair);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--bleu);margin-bottom:1rem;">Focus — Le Cycle de la Nature</h4>
+        <p style="font-size:13px;font-weight:300;color:var(--texte-leger);line-height:1.7;">Intégrer les cycles de la nature comme éléments sculpturaux et chromatiques. Un dialogue permanent entre le brut et le façonné.</p>
+        <p style="font-size:11px;font-weight:300;color:var(--texte-leger);margin-top:1rem;">Enduits sablés · Céramique émaillée · Bois flotté · Pigments naturels</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
+      <div style="background:var(--beige-pale);border:1px solid var(--beige-clair);padding:3rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--bleu);">L'Éloge du Naturel</h3>
+      </div>
+      <div style="background:var(--bleu-moyen);padding:3rem;">
+        <h4 style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Thème 4 — Chaleur & Tissage</h4>
+        <p style="font-size:13px;font-weight:300;color:var(--beige-clair);line-height:1.7;">L'enveloppe tactile. L'association de bois chaleureux, de pierre reconstituée et de tissus aux teintes terreuses sculpte des atmosphères vibrantes et élégantes.</p>
+      </div>
+      <div style="background:var(--blanc);border:1px solid var(--beige-clair);padding:3rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--bleu);">L'Essence des Matières</h3>
+        <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--texte-leger);margin-top:0.5rem;">Matériauthèque visuelle · L'Inspiration par la Couleur</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div><div class="footer-brand">Stéphane Hervé</div><div class="footer-tagline">Conception architecturale et création d'univers visuels</div></div>
+    <div class="footer-links"><a onclick="showPage('accueil')">Accueil</a><a onclick="showPage('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : RE2020
+══════════════════════════════════════ -->
+<div id="page-re2020" class="page">
+  <div class="re2020-intro">
+    <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Prestations / RE2020</p>
+    <h2>Maîtriser la RE2020</h2>
+    <p>Plus qu'une norme thermique, une ambition bioclimatique. Conception bioclimatique : Orientation Sud favorable, compacité, VMC double flux, brise-soleil.</p>
+  </div>
+
+  <div class="piliers-grid">
+    <div class="pilier-card">
+      <div class="pilier-num">Bbio</div>
+      <h4>Besoin Bioclimatique</h4>
+      <p>Sobriété énergétique (−30 % vs RT2012).</p>
+    </div>
+    <div class="pilier-card">
+      <div class="pilier-num">DH</div>
+      <h4>Confort d'été</h4>
+      <p>Gestion des gaz de chaleur.</p>
+    </div>
+    <div class="pilier-card">
+      <div class="pilier-num">IC</div>
+      <h4>Impact Carbone</h4>
+      <p>Impact sur le cycle de vie, les matériaux et l'énergie primaire.</p>
+    </div>
+    <div class="pilier-card">
+      <div class="pilier-num">Cep</div>
+      <h4>Consommation</h4>
+      <p>Consommation d'énergie primaire.</p>
+    </div>
+  </div>
+
+  <section class="slides-section" style="padding-top:1.5rem;padding-bottom:2rem;">
+    <div class="section-header">
+      <h3 class="section-title" style="font-size:2rem;">Les 5 Piliers de la Conception Bioclimatique</h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--beige-clair);">
+      <div style="background:var(--blanc);padding:2rem 1.5rem;border-top:3px solid var(--bleu);"><h4 style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--bleu);margin-bottom:8px;">L'Enveloppe & l'Orientation</h4><p style="font-size:12px;font-weight:300;color:var(--texte-leger);line-height:1.5;">Orientation Sud Stratégique, maximisation de la lumière naturelle.</p></div>
+      <div style="background:var(--blanc);padding:2rem 1.5rem;border-top:3px solid var(--bleu-moyen);"><h4 style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--bleu);margin-bottom:8px;">Isolation & Ponts Thermiques</h4><p style="font-size:12px;font-weight:300;color:var(--texte-leger);line-height:1.5;">Traitement rigoureux des ponts thermiques et des tubes de chaîne.</p></div>
+      <div style="background:var(--blanc);padding:2rem 1.5rem;border-top:3px solid var(--bleu-clair);"><h4 style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--bleu);margin-bottom:8px;">Protections Solaires</h4><p style="font-size:12px;font-weight:300;color:var(--texte-leger);line-height:1.5;">Brise-soleil optimisé pour l'été, rayonnement excessif éliminé.</p></div>
+      <div style="background:var(--blanc);padding:2rem 1.5rem;border-top:3px solid var(--beige);"><h4 style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--bleu);margin-bottom:8px;">Inertie Thermique</h4><p style="font-size:12px;font-weight:300;color:var(--texte-leger);line-height:1.5;">Utilisation de matériaux inertes pour stabiliser la température.</p></div>
+      <div style="background:var(--blanc);padding:2rem 1.5rem;border-top:3px solid var(--bleu);"><h4 style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--bleu);margin-bottom:8px;">Équipements & Régulation</h4><p style="font-size:12px;font-weight:300;color:var(--texte-leger);line-height:1.5;">Systèmes Haute Performance : VMC double flux, pompe à chaleur.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div><div class="footer-brand">Stéphane Hervé</div><div class="footer-tagline">Conception architecturale et création d'univers visuels</div></div>
+    <div class="footer-links"><a onclick="showPage('accueil')">Accueil</a><a onclick="showPage('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : RÉALISATIONS
+══════════════════════════════════════ -->
+<div id="page-realisations" class="page">
+
+  <!-- ── HERO ── -->
+  <div style="background:var(--bleu);padding:5rem 8rem 3rem;">
+    <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Prestations / Réalisations</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--blanc);">Projets <em style="font-style:italic;color:var(--beige);">Réalisés</em></h2>
+    <p style="font-size:14px;font-weight:300;color:var(--beige-clair);margin-top:1rem;max-width:600px;">De la recherche foncière à l'aménagement intérieur — Création d'un univers végétal.</p>
+  </div>
+
+  <!-- ── PROJET VEDETTE : LA MAISON BLANCHE ── -->
+  <div style="padding:4rem 8rem 2rem;">
+    <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--beige);margin-bottom:1.5rem;">Projet Référence</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:stretch;">
+      <div style="position:relative;overflow:hidden;">
+        <img src="images/index_00d42896.jpg" alt="La Maison Blanche — Parution HABITAT" style="width:100%;height:100%;object-fit:cover;display:block;min-height:300px;">
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(26,43,74,0.9));padding:1.5rem;">
+          <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:0.3rem;">Parution Presse</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:white;font-weight:300;">Magazine HABITAT · Nantes La Baule</p>
+        </div>
+      </div>
+      <div style="overflow:hidden;">
+        <img src="images/index_704296cb.jpg" alt="La Maison Blanche — Réalisation" style="width:100%;height:100%;object-fit:cover;display:block;min-height:300px;">
+      </div>
+    </div>
+    <div style="background:var(--beige-pale);border-left:3px solid var(--beige);padding:2rem 2.5rem;margin-top:0;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--bleu);">La Maison Blanche</h3>
+          <p style="font-size:13px;font-weight:300;color:var(--texte-leger);margin-top:0.4rem;">Gestion projet complète · De la recherche foncière à l'aménagement intérieur · Création d'un univers végétal</p>
+        </div>
+        <span style="display:inline-flex;align-items:center;background:var(--bleu);color:var(--beige);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:0.6rem 1.4rem;white-space:nowrap;">★ Paru dans HABITAT</span>
+      </div>
+      <div style="display:flex;gap:3rem;margin-top:1.5rem;flex-wrap:wrap;border-top:1px solid var(--beige-clair);padding-top:1.5rem;">
+        <div style="font-size:12px;color:var(--texte-leger);"><span style="font-weight:500;color:var(--bleu);display:block;margin-bottom:0.3rem;letter-spacing:1px;text-transform:uppercase;font-size:10px;">Mission</span>Recherche foncière · APS · PC · Aménagement intérieur</div>
+        <div style="font-size:12px;color:var(--texte-leger);"><span style="font-weight:500;color:var(--bleu);display:block;margin-bottom:0.3rem;letter-spacing:1px;text-transform:uppercase;font-size:10px;">Univers</span>Architecture contemporaine · Végétal · Épuré</div>
+        <div style="font-size:12px;color:var(--texte-leger);"><span style="font-weight:500;color:var(--bleu);display:block;margin-bottom:0.3rem;letter-spacing:1px;text-transform:uppercase;font-size:10px;">Distinction</span>Parution presse nationale — Magazine HABITAT</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GALERIE RÉALISATIONS ── -->
+  <div style="padding:2rem 8rem 5rem;">
+    <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--beige);margin-bottom:2rem;">Autres Réalisations</p>
+
+    <!-- Ligne 1 : 3 projets -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:1.5rem;">
+
+      <div style="overflow:hidden;background:var(--beige-pale);border:1px solid var(--beige-clair);">
+        <div style="overflow:hidden;aspect-ratio:4/3;">
+          <img src="images/index_a1bf6500.jpg" alt="Villa Blanche — rendu 3D" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div style="padding:1.2rem 1.5rem;">
+          <p style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:0.3rem;">Rendu 3D · PC accordé</p>
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--bleu);">Villa Blanche Contemporaine</h4>
+          <p style="font-size:11px;font-weight:300;color:var(--texte-leger);margin-top:0.4rem;line-height:1.6;">Maison individuelle, toit monopente. Permis de Construire, APS et plans d'exécution.</p>
+        </div>
+      </div>
+
+      <div style="overflow:hidden;background:var(--beige-pale);border:1px solid var(--beige-clair);">
+        <div style="overflow:hidden;aspect-ratio:4/3;">
+          <img src="images/index_3fef79d3.jpg" alt="Villa blanche avec garage" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div style="padding:1.2rem 1.5rem;">
+          <p style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:0.3rem;">Réalisation · Photo chantier</p>
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--bleu);">Villa Épurée & Garage</h4>
+          <p style="font-size:11px;font-weight:300;color:var(--texte-leger);margin-top:0.4rem;line-height:1.6;">Construction neuve. Volumes contemporains, enduit blanc, menuiseries anthracite.</p>
+        </div>
+      </div>
+
+      <div style="overflow:hidden;background:var(--beige-pale);border:1px solid var(--beige-clair);">
+        <div style="overflow:hidden;aspect-ratio:4/3;">
+          <img src="images/index_4856887a.jpg" alt="Villa toit 4 pans" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div style="padding:1.2rem 1.5rem;">
+          <p style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:0.3rem;">Réalisation · Photo chantier</p>
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--bleu);">Villa Toit 4 Pans</h4>
+          <p style="font-size:11px;font-weight:300;color:var(--texte-leger);margin-top:0.4rem;line-height:1.6;">Maison individuelle avec extension plain-pied. Grandes baies vitrées, volumes mixtes.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Ligne 2 : 3 projets -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:1.5rem;">
+
+      <div style="overflow:hidden;background:var(--beige-pale);border:1px solid var(--beige-clair);">
+        <div style="overflow:hidden;aspect-ratio:4/3;">
+          <img src="images/index_bcd53bea.jpg" alt="Maison briques ardoise" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div style="padding:1.2rem 1.5rem;">
+          <p style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:0.3rem;">Rendu 3D · APS</p>
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--bleu);">Maison Briques & Ardoise</h4>
+          <p style="font-size:11px;font-weight:300;color:var(--texte-leger);margin-top:0.4rem;line-height:1.6;">Parement briques, toit ardoise à deux lucarnes. Jardin paysager avec rochers et plantations.</p>
+        </div>
+      </div>
+
+      <div style="overflow:hidden;background:var(--beige-pale);border:1px solid var(--beige-clair);">
+        <div style="overflow:hidden;aspect-ratio:4/3;">
+          <img src="images/index_460dc463.jpg" alt="Villa plain-pied toit monopente" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div style="padding:1.2rem 1.5rem;">
+          <p style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:0.3rem;">Rendu 3D · PC</p>
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--bleu);">Villa Plain-pied Monopente</h4>
+          <p style="font-size:11px;font-weight:300;color:var(--texte-leger);margin-top:0.4rem;line-height:1.6;">Maison de plain-pied avec garage intégré. Toit monopente, volumes épurés sur terrain paysagé.</p>
+        </div>
+      </div>
+
+      <div style="overflow:hidden;background:var(--beige-pale);border:1px solid var(--beige-clair);">
+        <div style="overflow:hidden;aspect-ratio:4/3;">
+          <img src="images/index_b0aff585.jpg" alt="Maison bretonne contemporaine" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div style="padding:1.2rem 1.5rem;">
+          <p style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:0.3rem;">Rendu 3D · PC</p>
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--bleu);">Maison Contemporaine Bretonne</h4>
+          <p style="font-size:11px;font-weight:300;color:var(--texte-leger);margin-top:0.4rem;line-height:1.6;">Toiture ardoise, garage accolé, enduit blanc. Réinterprétation contemporaine de l'architecture locale.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Ligne 3 : 2 projets + CTA -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+
+      <div style="overflow:hidden;background:var(--beige-pale);border:1px solid var(--beige-clair);">
+        <div style="overflow:hidden;aspect-ratio:4/3;">
+          <img src="images/index_4a8db246.jpg" alt="Villa bois agapanthes rochers" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div style="padding:1.2rem 1.5rem;">
+          <p style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:0.3rem;">Rendu 3D · APS</p>
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--bleu);">Villa Bois & Agapanthes</h4>
+          <p style="font-size:11px;font-weight:300;color:var(--texte-leger);margin-top:0.4rem;line-height:1.6;">Bardage bois, rochers bretons, agapanthes. Intégration paysagère complète et univers végétal sur-mesure.</p>
+        </div>
+      </div>
+
+      <div style="overflow:hidden;background:var(--beige-pale);border:1px solid var(--beige-clair);">
+        <div style="overflow:hidden;aspect-ratio:4/3;">
+          <img src="images/index_b8a3476e.jpg" alt="Villa bois entrée paysagée" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div style="padding:1.2rem 1.5rem;">
+          <p style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--beige);margin-bottom:0.3rem;">Rendu 3D · APS</p>
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--bleu);">Villa Bois & Pierre — Entrée</h4>
+          <p style="font-size:11px;font-weight:300;color:var(--texte-leger);margin-top:0.4rem;line-height:1.6;">Vue de l'entrée principale. Bardage bois, agapanthes et rochers. Allée minérale et végétaux structurants.</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div style="background:var(--bleu);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2.5rem;text-align:center;">
+        <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--beige);margin-bottom:1rem;">Votre Projet</p>
+        <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:white;margin-bottom:1rem;line-height:1.3;">Parlons de votre<br><em style="color:var(--beige);">prochaine réalisation</em></h4>
+        <p style="font-size:11px;font-weight:300;color:var(--beige-clair);margin-bottom:2rem;line-height:1.7;">De l'esquisse à la réalité,<br>accompagnement sur-mesure<br>dans les dép. 37, 44, 49, 85, 86.</p>
+        <a href="#" onclick="showPage('contact')" style="background:var(--beige);color:var(--bleu);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:0.9rem 2rem;text-decoration:none;font-weight:500;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Prendre contact →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div><div class="footer-brand">Stéphane Hervé</div><div class="footer-tagline">Conception architecturale et création d'univers visuels</div></div>
+    <div class="footer-links"><a onclick="showPage('accueil')">Accueil</a><a onclick="showPage('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : QUI SUIS-JE ?
+══════════════════════════════════════ -->
+
+<div id="page-qui" class="page">
+  <div class="qui-hero">
+    <div class="qui-hero-content">
+      <h2>Stéphane Hervé</h2>
+      <p>Conception architecturale et création d'univers visuels</p>
+    </div>
+  </div>
+
+  <div class="qui-body">
+    <div class="qui-photo">
+      <div class="photo-placeholder">SH</div>
+      <div class="contact-info">
+        <span>06 47 23 24 52</span>
+        <span><a href="/cdn-cgi/l/email-protection#314245544159505f5459544347541f414571565c50585d1f525e5c"><span class="__cf_email__" data-cfemail="384b4c5d485059565d505d4a4e5d16484c785f55595154165b5755">[email&#160;protected]</span></a></span>
+        <span style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--bleu);margin-top:1rem;">Zone d'intervention</span>
+        <span>Dép. 37, 44, 49, 85, 86</span>
+        <span>France entière (Visio)</span>
+      </div>
+    </div>
+    <div class="qui-texte">
+      <h3>Qui suis-je ?</h3>
+      <p>Un professionnel engagé et orienté résultats, je m'appuie sur plus de vingt années d'expérience dans la conception de projets architecturaux, l'aménagement d'espaces professionnels, de vie, de travail et le suivi de chantiers.</p>
+      <p>Ces expériences m'ont permis de développer une expertise globale couvrant l'ensemble du cycle de vie d'un projet, du diagnostic initial à la réception des travaux. Cette vision transversale nourrit aujourd'hui ma capacité à proposer des solutions pertinentes, innovantes et parfaitement alignées avec les attentes de mes interlocuteurs.</p>
+      <p>Au cours de ma carrière, j'ai organisé de nombreuses participations aux salons professionnels d'envergure internationale (MAISON&OBJET à VILLEPINTE et CHRISTMASWORLD FRANCFORT), pour lesquels j'ai conçu des univers visuels singuliers pour des stands dimensionnés tout en pilotant l'organisation opérationnelle de dispositifs aux budgets parfois conséquents.</p>
+      <p><strong>Curieux par nature et profondément créatif, j'aime explorer les matériaux, imaginer de nouveaux concepts et renouveler sans cesse mes inspirations.</strong> Cette créativité, associée à une solide culture du résultat et à une forte proximité client, constitue aujourd'hui le socle de ma contribution professionnelle.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div><div class="footer-brand">Stéphane Hervé</div><div class="footer-tagline">Conception architecturale et création d'univers visuels</div></div>
+    <div class="footer-links"><a onclick="showPage('accueil')">Accueil</a><a onclick="showPage('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : OFFRE TARIFAIRE
+══════════════════════════════════════ -->
+<div id="page-offre" class="page">
+  <div class="offre-hero">
+    <h2>Offre Tarifaire</h2>
+    <p>Tableau des prestations conseil, dessin et plans</p>
+  </div>
+  <div class="offre-body">
+    <div class="pdf-download-block">
+      <div class="pdf-info">
+        <h3>Tableau Prestations Conseil Dessin Plans</h3>
+        <p>Retrouvez le détail complet de nos offres tarifaires, incluant les prestations de conseil, dessin et réalisation de plans. Document PDF à télécharger.</p>
+      </div>
+      <button class="btn-download" onclick="alert('Merci de votre intérêt. Veuillez nous contacter pour recevoir notre tableau tarifaire complet.')">
+        ↓ Télécharger le PDF
+      </button>
+    </div>
+    <div style="background:var(--blanc);border:1px solid var(--beige-clair);padding:3rem;">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--bleu);margin-bottom:2rem;">Une question sur nos tarifs ?</h3>
+      <p style="font-size:14px;font-weight:300;color:var(--texte-leger);line-height:1.7;margin-bottom:2rem;">Chaque projet est unique. N'hésitez pas à nous contacter pour obtenir un devis personnalisé adapté à vos besoins et à votre budget.</p>
+      <button class="btn-download" onclick="showPage('contact')">Demander un devis →</button>
+    </div>
+  </div>
+
+  <footer>
+    <div><div class="footer-brand">Stéphane Hervé</div><div class="footer-tagline">Conception architecturale et création d'univers visuels</div></div>
+    <div class="footer-links"><a onclick="showPage('accueil')">Accueil</a><a onclick="showPage('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : CONTACT
+══════════════════════════════════════ -->
+<div id="page-contact" class="page">
+  <div class="contact-hero">
+    <h2>Parlons de votre projet</h2>
+    <p>Que ce soit pour un permis de construire, la rénovation d'un existant<br>ou la création d'un univers visuel, prenons du temps……</p>
+  </div>
+  <div class="contact-body">
+    <div class="contact-form-wrap">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Nom et Prénom</label>
+          <input type="text" placeholder="Votre nom complet">
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="votre@email.com">
+        </div>
+        <div class="form-field">
+          <label>Téléphone</label>
+          <input type="tel" placeholder="06 XX XX XX XX">
+        </div>
+        <div class="form-field">
+          <label>Localisation</label>
+          <input type="text" placeholder="Ville, département">
+        </div>
+        <div class="form-field">
+          <label>Sujet</label>
+          <select>
+            <option value="">— Sélectionnez un sujet —</option>
+            <option>Permis de Construire</option>
+            <option>Déclaration Préalable</option>
+            <option>Rénovation / Extension</option>
+            <option>Aménagement Intérieur</option>
+            <option>Aménagement d'Espaces Professionnels</option>
+            <option>Univers Visuels / Stand</option>
+            <option>Cahier de Tendance</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea placeholder="Décrivez votre projet en quelques mots…"></textarea>
+        </div>
+      </div>
+      <button class="btn-submit" onclick="alert('Message envoyé ! Nous vous contacterons très prochainement.')">Envoyer le message</button>
+    </div>
+  </div>
+
+  <footer>
+    <div><div class="footer-brand">Stéphane Hervé</div><div class="footer-tagline">Conception architecturale et création d'univers visuels</div></div>
+    <div class="footer-links"><a onclick="showPage('accueil')">Accueil</a><a onclick="showPage('contact')">Contact</a></div>
+  </footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  let prestationsOpen = false;
+  let visuelsOpen = false;
+
+  function hideAllPages() {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  }
+
+  function setActiveNav(id) {
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    const el = document.getElementById('nav-' + id);
+    if (el) el.classList.add('active');
+  }
+
+  function setActiveSub(id) {
+    document.querySelectorAll('.subnav a, .subnav-visuels a').forEach(a => a.classList.remove('active'));
+    const el = document.getElementById('sub-' + id);
+    if (el) el.classList.add('active');
+  }
+
+  function showPage(id) {
+    hideAllPages();
+    closePrestations();
+    const page = document.getElementById('page-' + id);
+    if (page) page.classList.add('active');
+    setActiveNav(id);
+    window.scrollTo(0, 0);
+  }
+
+  function togglePrestations() {
+    prestationsOpen = !prestationsOpen;
+    document.getElementById('subnav-prestations').classList.toggle('visible', prestationsOpen);
+    if (!prestationsOpen) {
+      closeVisuels();
+    }
+    setActiveNav('prestations');
+    // Show particulier by default when opening
+    if (prestationsOpen) {
+      showPrestation('particulier');
+    }
+  }
+
+  function closePrestations() {
+    prestationsOpen = false;
+    document.getElementById('subnav-prestations').classList.remove('visible');
+    closeVisuels();
+  }
+
+  function toggleVisuels() {
+    visuelsOpen = !visuelsOpen;
+    document.getElementById('subnav-visuels').classList.toggle('visible', visuelsOpen);
+    if (visuelsOpen) {
+      showPrestation('amenagement-pro');
+    }
+  }
+
+  function closeVisuels() {
+    visuelsOpen = false;
+    document.getElementById('subnav-visuels').classList.remove('visible');
+  }
+
+  function showPrestation(id) {
+    hideAllPages();
+    const page = document.getElementById('page-' + id);
+    if (page) page.classList.add('active');
+    setActiveNav('prestations');
+    setActiveSub(id);
+    window.scrollTo(0, 0);
+    // Keep subnav open
+    prestationsOpen = true;
+    document.getElementById('subnav-prestations').classList.add('visible');
+    // Adjust padding for double subnav
+    if (id === 'amenagement-pro' || id === 'cahier-tendance') {
+      visuelsOpen = true;
+      document.getElementById('subnav-visuels').classList.add('visible');
+      document.querySelectorAll('#page-' + id + '.page.active').forEach(p =>
