@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particulier — Stéphane Hervé AcA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bleu: #1a2a4a;
+      --beige: #b8a98a;
+      --blanc: #ffffff;
+      --fond: #f7f5f1;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Jost',sans-serif; background:var(--fond); }
+
+    /* HEADER */
+    .page-header {
+      background:var(--bleu);
+      padding:1.5rem 3rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .back-btn {
+      color:var(--beige);
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .back-btn:hover { color:#fff; }
+    .page-header h1 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.8rem;
+      font-weight:300;
+      color:#fff;
+    }
+
+    /* INTRO */
+    .page-intro {
+      padding:3rem;
+      border-bottom:1px solid #ddd;
+      background:#fff;
+    }
+    .page-intro h2 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.5rem;
+      font-weight:300;
+      color:var(--bleu);
+      margin-bottom:0.5rem;
+    }
+    .page-intro p {
+      font-size:14px;
+      color:#666;
+      font-weight:300;
+    }
+    .slide-count {
+      display:inline-block;
+      background:var(--beige);
+      color:#fff;
+      font-size:11px;
+      letter-spacing:2px;
+      padding:4px 12px;
+      margin-top:1rem;
+      text-transform:uppercase;
+    }
+
+    /* GRID */
+    .slides-grid {
+      padding:2rem 2rem 4rem;
+    }
+    .slide-thumb {
+      transition:transform .2s, box-shadow .2s;
+    }
+    .slide-thumb:hover {
+      transform:scale(1.02);
+      box-shadow:0 8px 32px rgba(0,0,0,.15);
+      z-index:1;
+      position:relative;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.93);
+      z-index:9999;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
+    .lightbox.active { display:flex; }
+    .lightbox img {
+      max-width:92vw;
+      max-height:82vh;
+      object-fit:contain;
+      border-radius:3px;
+      box-shadow:0 20px 60px rgba(0,0,0,.5);
+    }
+    .lightbox-label {
+      color:#ccc;
+      font-size:13px;
+      margin-top:1rem;
+      font-weight:300;
+      letter-spacing:1px;
+    }
+    .lightbox-counter {
+      color:var(--beige);
+      font-size:12px;
+      letter-spacing:2px;
+      margin-top:6px;
+    }
+    .lb-close {
+      position:fixed;
+      top:20px; right:28px;
+      color:#fff;
+      font-size:2.5rem;
+      cursor:pointer;
+      opacity:.8;
+      line-height:1;
+    }
+    .lb-close:hover { opacity:1; }
+    .lb-prev, .lb-next {
+      position:fixed;
+      top:50%;
+      transform:translateY(-50%);
+      color:#fff;
+      font-size:3rem;
+      cursor:pointer;
+      opacity:.6;
+      padding:1rem;
+      user-select:none;
+    }
+    .lb-prev:hover, .lb-next:hover { opacity:1; }
+    .lb-prev { left:12px; }
+    .lb-next { right:12px; }
+  </style>
+</head>
+<body>
+
+  <nav style="background:#1a2a4a;padding:1rem 2rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
+  <a href="index.html" style="color:#b8a98a;text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Accueil</a>
+  <span style="color:rgba(255,255,255,0.2)">|</span>
+  <a href="particuliers.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Particuliers</a>
+  <a href="professionnels.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Professionnels</a>
+  <a href="amenagement.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Aménagement</a>
+  <a href="cahier-tendance.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Cahier de Tendance</a>
+  <a href="re2020.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">RE2020</a>
+  <a href="realisations.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Réalisations</a>
+  <span style="color:rgba(255,255,255,0.2)">|</span>
+  <a href="qui-suis-je.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Qui suis-je ?</a>
+  <a href="offre-tarifs.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Offre & Tarifs</a>
+  <a href="contact.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Contact</a>
+</nav>
+
+  <div class="page-intro">
+    <h2>De l'Esquisse à la Réalité</h2>
+    <p>Toutes les étapes de votre projet architectural — cliquez sur une slide pour l'agrandir.</p>
+    <span class="slide-count">29 slides · Cliquer pour agrandir</span>
+  </div>
+
+  <div class="slides-grid">
+    
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/particuliers-hero-01-48385a4d.jpg" alt="L'Expertise Architecturale sur Mesure" class="slide-thumb" data-index="0" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(0)">
+      <img src="images/particuliers-hero-02-61262ad1.jpg" alt="Penser votre espace — Zone d'intervention" class="slide-thumb" data-index="1" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(1)">
+      <img src="images/particuliers-hero-03-a9c11736.jpg" alt="Votre Projet Architectural, Étape par Étape" class="slide-thumb" data-index="2" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(2)">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/particuliers-hero-04-d1cf47ac.jpg" alt="L'Art de Concevoir" class="slide-thumb" data-index="3" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(3)">
+      <img src="images/particuliers-hero-05-557df3ad.jpg" alt="Votre vision, notre expertise" class="slide-thumb" data-index="4" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(4)">
+      <img src="images/particuliers-hero-06-62209d16.jpg" alt="Le Processus de Conception en 6 Étapes" class="slide-thumb" data-index="5" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(5)">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/particuliers-hero-07-49b04d19.jpg" alt="01 — Recherche Foncière" class="slide-thumb" data-index="6" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(6)">
+      <img src="images/particuliers-hero-08-3993a9eb.jpg" alt="02 — Analyse Urbanistique" class="slide-thumb" data-index="7" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(7)">
+      <img src="images/particuliers-hero-09-e219271a.jpg" alt="03 — L'Avant-Projet Sommaire (APS/ADV)" class="slide-thumb" data-index="8" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(8)">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/particuliers-hero-10-b17d7cc1.jpg" alt="04 — Aménagement Intérieur" class="slide-thumb" data-index="9" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(9)">
+      <img src="images/particuliers-hero-11-4da58d29.jpg" alt="05 — Consultation Préventive (détail)" class="slide-thumb" data-index="12" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(12)">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/particuliers-hero-12-9ca255aa.jpg" alt="L'Aboutissement du Projet (suite)" class="slide-thumb" data-index="13" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(13)">
+      <img src="images/particuliers-hero-13-a2594268.jpg" alt="Le Permis de Construire (PC)" class="slide-thumb" data-index="14" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(14)">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/particuliers-hero-14-d6625868.jpg" alt="La Déclaration Préalable (DP)" class="slide-thumb" data-index="15" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(15)">
+      <img src="images/particuliers-hero-15-3a3f4907.jpg" alt="Focus PC : Insertion & Exigence Environnementale" class="slide-thumb" data-index="16" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(16)">
+      <img src="images/particuliers-hero-16-c7ead119.jpg" alt="06 — Plan d'Exécution" class="slide-thumb" data-index="17" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(17)">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/particuliers-hero-17-9ccf3dae.jpg" alt="Synthèse de notre accompagnement" class="slide-thumb" data-index="18" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(18)">
+      <img src="images/particuliers-hero-18-5ba87803.jpg" alt="Sécurité Technique et Garanties" class="slide-thumb" data-index="19" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(19)">
+      <img src="images/particuliers-hero-19-01fc4d3f.jpg" alt="Guide Expert : DP vs PC" class="slide-thumb" data-index="20" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(20)">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/particuliers-hero-20-d38c714d.jpg" alt="Au-delà du Permis : Aménagement Intérieur" class="slide-thumb" data-index="21" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(21)">
+      <img src="images/particuliers-hero-21-88ad62ce.jpg" alt="Réalisation — Séjour/Cuisine" class="slide-thumb" data-index="22" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(22)">
+      <img src="images/particuliers-hero-22-685b66a1.jpg" alt="Réalisation — Salon" class="slide-thumb" data-index="23" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(23)">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/particuliers-hero-23-6ebf2399.jpg" alt="Réalisation — Plan 3D" class="slide-thumb" data-index="24" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(24)">
+      <img src="images/particuliers-hero-24-2a8f4f72.jpg" alt="Réalisation — Suite parentale" class="slide-thumb" data-index="25" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(25)">
+      <img src="images/particuliers-hero-25-8e177906.jpg" alt="Réalisation — Chambre" class="slide-thumb" data-index="26" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(26)">
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px;">
+      <img src="images/particuliers-hero-26-69e31e35.jpg" alt="Réalisation — Chambre enfant" class="slide-thumb" data-index="27" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(27)">
+      <img src="images/particuliers-hero-27-7ed83786.jpg" alt="Réalisation — Studio" class="slide-thumb" data-index="28" style="width:100%;display:block;border-radius:2px;cursor:zoom-in;" onclick="openLightbox(28)">
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <span class="lb-close" onclick="closeLightbox()">×</span>
+    <span class="lb-prev" onclick="changeSlide(-1)">&#8249;</span>
+    <img id="lb-img" src="" alt="">
+    <div class="lightbox-label" id="lb-label"></div>
+    <div class="lightbox-counter" id="lb-counter"></div>
+    <span class="lb-next" onclick="changeSlide(1)">&#8250;</span>
+  </div>
+
+  <script>
+    const slides = [
+    {src: "images/particuliers-01-lexpertise-architecturale-sur-mesure.jpg", label: "L'Expertise Architecturale sur Mesure"},
+    {src: "images/particuliers-02-penser-votre-espace-zone-dintervention.jpg", label: "Penser votre espace — Zone d'intervention"},
+    {src: "images/particuliers-03-votre-projet-architectural-étape-par-éta.jpg", label: "Votre Projet Architectural, Étape par Étape"},
+    {src: "images/particuliers-04-lart-de-concevoir.jpg", label: "L'Art de Concevoir"},
+    {src: "images/particuliers-05-votre-vision-notre-expertise.jpg", label: "Votre vision, notre expertise"},
+    {src: "images/particuliers-06-le-processus-de-conception-en-6-étapes.jpg", label: "Le Processus de Conception en 6 Étapes"},
+    {src: "images/particuliers-07-01-recherche-foncière.jpg", label: "01 — Recherche Foncière"},
+    {src: "images/particuliers-08-02-analyse-urbanistique.jpg", label: "02 — Analyse Urbanistique"},
+    {src: "images/particuliers-09-03-lavant-projet-sommaire-apsadv.jpg", label: "03 — L'Avant-Projet Sommaire (APS/ADV)"},
+    {src: "images/particuliers-10-04-aménagement-intérieur.jpg", label: "04 — Aménagement Intérieur"},
+    {src: "images/particuliers-11-05-consultation-préventive.jpg", label: "05 — Consultation Préventive"},
+    {src: "images/particuliers-12-laboutissement-du-projet-le-dossier-admi.jpg", label: "L'Aboutissement du Projet : Le Dossier Administratif"},
+    {src: "images/particuliers-13-05-consultation-préventive-détail.jpg", label: "05 — Consultation Préventive (détail)"},
+    {src: "images/particuliers-14-laboutissement-du-projet-suite.jpg", label: "L'Aboutissement du Projet (suite)"},
+    {src: "images/particuliers-15-le-permis-de-construire-pc.jpg", label: "Le Permis de Construire (PC)"},
+    {src: "images/particuliers-16-la-déclaration-préalable-dp.jpg", label: "La Déclaration Préalable (DP)"},
+    {src: "images/particuliers-17-focus-pc-insertion-exigence-environnemen.jpg", label: "Focus PC : Insertion & Exigence Environnementale"},
+    {src: "images/particuliers-18-06-plan-dexécution.jpg", label: "06 — Plan d'Exécution"},
+    {src: "images/particuliers-19-synthèse-de-notre-accompagnement.jpg", label: "Synthèse de notre accompagnement"},
+    {src: "images/particuliers-20-sécurité-technique-et-garanties.jpg", label: "Sécurité Technique et Garanties"},
+    {src: "images/particuliers-21-guide-expert-dp-vs-pc.jpg", label: "Guide Expert : DP vs PC"},
+    {src: "images/particuliers-22-au-delà-du-permis-aménagement-intérieur.jpg", label: "Au-delà du Permis : Aménagement Intérieur"},
+    {src: "images/particuliers-23-réalisation-séjourcuisine.jpg", label: "Réalisation — Séjour/Cuisine"},
+    {src: "images/particuliers-24-réalisation-salon.jpg", label: "Réalisation — Salon"},
+    {src: "images/particuliers-25-réalisation-plan-3d.jpg", label: "Réalisation — Plan 3D"},
+    {src: "images/particuliers-26-réalisation-suite-parentale.jpg", label: "Réalisation — Suite parentale"},
+    {src: "images/particuliers-27-réalisation-chambre.jpg", label: "Réalisation — Chambre"},
+    {src: "images/particuliers-28-réalisation-chambre-enfant.jpg", label: "Réalisation — Chambre enfant"},
+    {src: "images/particuliers-29-réalisation-studio.jpg", label: "Réalisation — Studio"},
+  ];
+    let current = 0;
+
+    function openLightbox(idx) {
+      current = idx;
+      showSlide();
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function showSlide() {
+      document.getElementById('lb-img').src = slides[current].src;
+      document.getElementById('lb-img').alt = slides[current].label;
+      document.getElementById('lb-label').textContent = slides[current].label;
+      document.getElementById('lb-counter').textContent = (current+1) + ' / ' + slides.length;
+    }
+    function changeSlide(dir) {
+      current = (current + dir + slides.length) % slides.length;
+      showSlide();
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') changeSlide(1);
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+      if (e.key === 'Escape') closeLightbox();
+    });
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeLightbox();
+    });
+  </script>
+
+</body>
+</html>
