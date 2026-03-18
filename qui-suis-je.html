@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qui suis-je ? — Stéphane Hervé AcA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --bleu:#1a2a4a; --beige:#b8a98a; --fond:#f7f5f1; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Jost',sans-serif; background:var(--fond); }
+
+    .page-header {
+      background:var(--bleu);
+      padding:1.5rem 3rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .back-btn { color:var(--beige); text-decoration:none; font-size:13px; letter-spacing:2px; text-transform:uppercase; }
+    .back-btn:hover { color:#fff; }
+    .page-header h1 { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:#fff; }
+
+    .hero-slide {
+      width:100%;
+      cursor:zoom-in;
+      display:block;
+      transition:opacity .2s;
+    }
+    .hero-slide:hover { opacity:.92; }
+
+    /* Texte bio */
+    .bio-section {
+      background:#fff;
+      padding:3rem 4rem;
+      border-top:3px solid var(--beige);
+    }
+    .bio-section h2 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.2rem;
+      font-weight:300;
+      color:var(--bleu);
+      margin-bottom:1.5rem;
+    }
+    .bio-section h2 em {
+      font-style:italic;
+      color:var(--beige);
+    }
+    .bio-text {
+      font-size:14.5px;
+      font-weight:300;
+      color:#444;
+      line-height:1.85;
+      max-width:880px;
+    }
+    .bio-text strong {
+      color:var(--bleu);
+      font-weight:500;
+    }
+    .bio-text p + p { margin-top:1.2rem; }
+
+    /* Coordonnées */
+    .contact-strip {
+      background:var(--bleu);
+      padding:2rem 4rem;
+      display:flex;
+      gap:3rem;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .contact-strip a, .contact-strip span {
+      color:#ccc;
+      font-size:13px;
+      letter-spacing:1px;
+      text-decoration:none;
+      font-weight:300;
+    }
+    .contact-strip a:hover { color:var(--beige); }
+    .contact-strip .label {
+      color:var(--beige);
+      font-size:10px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      display:block;
+      margin-bottom:3px;
+    }
+
+    /* Lightbox */
+    .lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,.93); z-index:9999; flex-direction:column; align-items:center; justify-content:center; }
+    .lightbox.active { display:flex; }
+    .lightbox img { max-width:96vw; max-height:92vh; object-fit:contain; border-radius:2px; }
+    .lb-close { position:fixed; top:20px; right:28px; color:#fff; font-size:2.5rem; cursor:pointer; opacity:.8; line-height:1; }
+    .lb-close:hover { opacity:1; }
+  </style>
+</head>
+<body>
+<nav style="background:#1a2a4a;padding:1rem 2rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
+  <a href="index.html" style="color:#b8a98a;text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Accueil</a>
+  <span style="color:rgba(255,255,255,0.2)">|</span>
+  <a href="particuliers.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Particuliers</a>
+  <a href="professionnels.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Professionnels</a>
+  <a href="amenagement.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Aménagement</a>
+  <a href="cahier-tendance.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Cahier de Tendance</a>
+  <a href="re2020.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">RE2020</a>
+  <a href="realisations.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Réalisations</a>
+  <a href="vie-chantier.html" style="color:#b8a98a;text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Vie de Chantier</a>
+  <span style="color:rgba(255,255,255,0.2)">|</span>
+  <a href="qui-suis-je.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Qui suis-je ?</a>
+  <a href="offre-tarifs.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Offre & Tarifs</a>
+  <a href="contact.html" style="color:rgba(255,255,255,0.7);text-decoration:none;font-family:Jost,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Contact</a>
+</nav>
+
+  <!-- Slide cliquable plein écran -->
+  <img
+    src="images/qui-suis-je-hero-01-5fefc9ea.jpg"
+    alt="Présentation Stéphane Hervé"
+    class="hero-slide"
+    onclick="document.getElementById('lightbox').classList.add('active'); document.body.style.overflow='hidden';"
+  >
+
+  <!-- Texte biographique -->
+  <div class="bio-section">
+    <h2>Stéphane <em>HERVÉ</em></h2>
+    <div class="bio-text">
+      <p>Un professionnel engagé et orienté résultats, je m'appuie sur plus de vingt années d'expérience dans la conception de projets architecturaux, l'aménagement d'espaces professionnels, de vie, de travail et le suivi de chantiers. Ces expériences m'ont permis de développer une expertise globale couvrant l'ensemble du cycle de vie d'un projet, du diagnostic initial à la réception des travaux.</p>
+      <p>Cette vision transversale nourrit aujourd'hui ma capacité à proposer des solutions pertinentes, innovantes et parfaitement alignées avec les attentes de mes interlocuteurs.</p>
+      <p>Au cours de ma carrière, j'ai organisé de nombreuses participations aux salons professionnels d'envergure internationale (MAISON&amp;OBJET à VILLEPINTE et CHRISTMASWORLD FRANCFORT), pour lesquels j'ai conçu des univers visuels singuliers pour des stands dimensionnés tout en pilotant l'organisation opérationnelle de dispositifs aux budgets parfois conséquents.</p>
+      <p><strong>Curieux par nature et profondément créatif, j'aime explorer les matériaux, imaginer de nouveaux concepts et renouveler sans cesse mes inspirations.</strong> Cette créativité, associée à une solide culture du résultat et à une forte proximité client, constitue aujourd'hui le socle de ma contribution professionnelle.</p>
+    </div>
+  </div>
+
+  <!-- Coordonnées -->
+  <div class="contact-strip">
+    <div>
+      <span class="label">Téléphone</span>
+      <a href="tel:0647232452">06 47 23 24 52</a>
+    </div>
+    <div>
+      <span class="label">Email</span>
+      <a href="/cdn-cgi/l/email-protection#6b181f0e1b030a050e030e191d0e451b1f012b0c060a020745080406"><span class="__cf_email__" data-cfemail="e6959283968e8788838e83949083c896928ca6818b878f8ac885898b">[email&#160;protected]</span></a>
+    </div>
+    <div>
+      <span class="label">LinkedIn</span>
+      <a href="https://www.linkedin.com/in/stephane-herve-laz" target="_blank">linkedin.com/in/stephane-herve-laz</a>
+    </div>
+    <div>
+      <span class="label">Zone d'intervention</span>
+      <span>Dép. 37, 44, 49, 85, 86 · France entière en visioconférence</span>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="lb-close" onclick="document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow='';">×</span>
+    <img src="images/qui-suis-je-hero-02-cc2599a0.jpg
