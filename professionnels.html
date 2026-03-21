@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professionnels — Stéphane Hervé · AcA</title>
+  <meta name="description" content="Externalisation technique pour MOE, Constructeurs et AMO. Réactif, précis, disponible. APS en 48h, dossier PC complet en 7 jours.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bleu: #1a2b4a;
+      --bleu-moyen: #2d4370;
+      --bleu-clair: #3d5a8a;
+      --beige: #c8b89a;
+      --beige-clair: #e8ddd0;
+      --beige-pale: #f5f0ea;
+      --blanc: #faf8f5;
+      --texte: #2a2420;
+      --texte-leger: #6b5e52;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--blanc); color: var(--texte); overflow-x: hidden; }
+
+    /* NAV */
+    nav.main-nav {
+      background: var(--bleu);
+      padding: 0 3rem;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(200,184,154,0.25);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo .name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--blanc); letter-spacing: 2px; text-transform: uppercase; }
+    .nav-logo .tagline { font-size: 9px; font-weight: 300; color: var(--beige); letter-spacing: 2.5px; text-transform: uppercase; margin-top: 2px; }
+    .nav-links { display: flex; gap: 0; margin-left: auto; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 0 14px; height: 72px; display: flex; align-items: center; transition: all 0.3s; border-bottom: 2px solid transparent; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { color: var(--beige); border-bottom-color: var(--beige); }
+    .nav-links a.highlight { color: var(--beige); }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu-moyen) 60%, var(--bleu-clair) 100%); padding: 3rem 8rem; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23c8b89a' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .hero-content { position: relative; z-index: 2; max-width: 720px; }
+    .hero-eyebrow { display: inline-block; font-size: 10px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: var(--beige); border-left: 2px solid var(--beige); padding-left: 12px; margin-bottom: 1.5rem; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 300; color: var(--blanc); line-height: 1.15; margin-bottom: 1.2rem; }
+    .hero h1 em { font-style: italic; color: var(--beige); }
+    .hero-sub { font-size: 15px; font-weight: 300; color: var(--beige-clair); line-height: 1.7; max-width: 580px; margin-bottom: 2rem; }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.5rem; }
+    .hero-pill { background: rgba(200,184,154,0.12); border: 1px solid rgba(200,184,154,0.3); color: var(--beige-clair); font-size: 11px; padding: 6px 14px; letter-spacing: 1px; }
+    .hero-pill strong { color: var(--beige); }
+    .btn-primary { display: inline-block; background: var(--beige); color: var(--bleu); text-decoration: none; font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; padding: 14px 32px; transition: all 0.3s; margin-right: 12px; }
+    .btn-primary:hover { background: var(--beige-clair); }
+    .btn-secondary { display: inline-block; border: 1px solid rgba(200,184,154,0.5); color: var(--beige-clair); text-decoration: none; font-size: 11px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; padding: 14px 28px; transition: all 0.3s; }
+    .btn-secondary:hover { border-color: var(--beige); color: var(--beige); }
+
+    /* SECTIONS */
+    .section { padding: 2.5rem 8rem; }
+    .section-label { font-size: 10px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: var(--beige); margin-bottom: 0.4rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 300; color: var(--bleu); margin-bottom: 0.3rem; }
+    .section-intro { font-size: 13px; font-weight: 300; color: var(--texte-leger); line-height: 1.6; max-width: 640px; margin-bottom: 1.5rem; }
+    .divider { height: 1px; background: var(--beige-clair); }
+
+    /* VALEUR GRID */
+    .valeur-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 0.5rem; }
+    .valeur-card { background: var(--blanc); border: 1px solid var(--bleu); padding: 1.2rem 1rem; transition: background 0.3s; }
+    .valeur-card:hover { background: var(--beige-pale); }
+    .valeur-icon { font-size: 1.2rem; margin-bottom: 0.5rem; display: block; }
+    .valeur-card h3 { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--bleu); margin-bottom: 0.5rem; }
+    .valeur-card p { font-size: 12px; font-weight: 300; color: var(--bleu); line-height: 1.6; }
+
+    /* GALLERY */
+    .gallery-section { padding: 2rem 4rem; background: var(--beige-pale); }
+    .slide-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 6px; }
+    .slide-thumb { cursor: zoom-in; overflow: hidden; border-radius: 2px; transition: transform .2s, box-shadow .2s; }
+    .slide-thumb:hover { transform: scale(1.02); box-shadow: 0 8px 32px rgba(0,0,0,.15); }
+    .slide-thumb img { width: 100%; display: block; }
+
+    /* FAQ */
+    .faq-section { padding: 2rem 8rem; }
+    .faq-item { border-bottom: 1px solid var(--beige-clair); padding: 0.7rem 0; }
+    .faq-question { font-size: 12px; font-weight: 500; color: var(--bleu); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; letter-spacing: 0.5px; }
+    .faq-question::after { content: '+'; font-size: 1.1rem; font-weight: 300; color: var(--bleu); flex-shrink: 0; transition: transform 0.3s; }
+    .faq-item.open .faq-question::after { transform: rotate(45deg); }
+    .faq-answer { font-size: 12px; font-weight: 300; color: var(--texte-leger); line-height: 1.6; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+    .faq-item.open .faq-answer { max-height: 200px; padding-top: 0.4rem; }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(135deg, var(--bleu-moyen), var(--bleu-clair)); padding: 3rem 8rem; text-align: center; }
+    .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--blanc); margin-bottom: 0.6rem; }
+    .cta-section p { font-size: 13px; font-weight: 300; color: var(--beige-clair); margin-bottom: 1.8rem; line-height: 1.6; }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.93); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 82vh; object-fit: contain; border-radius: 3px; }
+    .lightbox-label { color: #ccc; font-size: 13px; margin-top: 1rem; font-weight: 300; }
+    .lightbox-counter { color: var(--beige); font-size: 12px; letter-spacing: 2px; margin-top: 6px; }
+    .lb-close { position: fixed; top: 20px; right: 28px; color: #fff; font-size: 2.5rem; cursor: pointer; opacity: .8; }
+    .lb-close:hover { opacity: 1; }
+    .lb-prev, .lb-next { position: fixed; top: 50%; transform: translateY(-50%); color: #fff; font-size: 3rem; cursor: pointer; opacity: .6; padding: 1rem; user-select: none; }
+    .lb-prev:hover, .lb-next:hover { opacity: 1; }
+    .lb-prev { left: 12px; }
+    .lb-next { right: 12px; }
+
+    /* FOOTER */
+    footer { background: var(--bleu); padding: 2.5rem 8rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(200,184,154,0.15); }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--blanc); font-weight: 300; }
+    .footer-tagline { font-size: 11px; color: var(--beige); letter-spacing: 1.5px; margin-top: 4px; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--beige); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="main-nav">
+  <a href="index.html" class="nav-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" style="height:48px;width:auto;display:block;">
+      <text x="108" y="268" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="300" font-size="240" fill="#ffffff">A</text>
+      <text x="298" y="285" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="300" font-size="210" fill="#c8b89a">A</text>
+      <text x="248" y="258" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="300" font-size="130" fill="#c8b89a">c</text>
+      <path d="M 44,195 A 310,47 1 0,1 548,215" fill="none" stroke="#c8b89a" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/>
+      <path d="M 70,218 A 280,55 1 0,0 542,238" fill="none" stroke="#c8b89a" stroke-width="0.75" stroke-linecap="round" opacity="0.4"/>
+      <line x1="170" y1="314" x2="470" y2="314" stroke="#c8b89a" stroke-width="0.5" opacity="0.35"/>
+      <text x="320" y="334" font-family="'Gill Sans','Calibri Light',sans-serif" font-weight="300" font-size="12" fill="#c8b89a" text-anchor="middle" letter-spacing="5">ATELIER CONCEPTION ARCHITECTURALE</text>
+    </svg>
+    <div class="logo-text">
+      <span class="name">Atelier Conception Architecturale</span>
+      <span class="tagline">Stéphane Hervé · Technicien indépendant</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Accueil</a>
+    <a href="particuliers.html">Particuliers</a>
+    <a href="professionnels.html" class="active">Professionnels</a>
+    <a href="amenagement.html">Aménagement</a>
+    <a href="realisations.html">Réalisations</a>
+    <a href="cahier-tendance.html">Tendances</a>
+    <a href="re2020.html">RE2020</a>
+    <a href="vie-chantier.html" class="highlight">Vie de Chantier</a>
+    <a href="offre-tarifs.html">Tarifs</a>
+    <a href="qui-suis-je.html">Qui suis-je ?</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<!-- BLOC 1 : HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">MOE · Constructeurs · AMO · Marchands de Biens</p>
+    <h1><em>Sous-traitez vos plans. Je livre.</em></h1>
+    <p class="hero-sub">APS en 48 h. Dossier PC complet en 7 jours ouvrés. Disponible sur vos pics d'activité. Technicien indépendant, pas de frais de structure.</p>
+    <div class="hero-pills">
+      <span class="hero-pill"><strong>⚡ 48 h</strong>&nbsp; APS livré</span>
+      <span class="hero-pill"><strong>📐 DWG + PDF</strong>&nbsp; livrables</span>
+      <span class="hero-pill"><strong>🔒 RC Pro</strong>&nbsp; active</span>
+      <span class="hero-pill"><strong>20 ans</strong>&nbsp; d'expérience</span>
+    </div>
+    <a class="btn-primary" href="contact.html">Demander un devis →</a>
+    <a class="btn-secondary" href="offre-tarifs.html">Voir l'offre tarifaire</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BLOC 2 : PROPOSITION DE VALEUR -->
+<section class="section">
+  <p class="section-label">Pourquoi externaliser avec AcA ?</p>
+  <h2 class="section-title">5 raisons de travailler avec moi</h2>
+  <p class="section-intro">Ce n'est pas un recrutement. C'est un renfort technique disponible quand vous en avez besoin, qui disparaît quand vous n'en avez plus besoin.</p>
+  <div class="valeur-grid">
+    <div class="valeur-card">
+      <span class="valeur-icon">⚡</span>
+      <h3>Réactif sur vos pics d'activité</h3>
+      <p>Vous ne pouvez pas — et ne devez pas — absorber chaque sursaut de charge en interne. Je m'active quand vous en avez besoin, je libère votre équipe quand vous n'en avez plus besoin. Pas de contrat de travail, pas de période d'essai.</p>
+    </div>
+    <div class="valeur-card">
+      <span class="valeur-icon">📐</span>
+      <h3>Dossiers complets, conformes, prêts au dépôt</h3>
+      <p>APS, PC, DP, plans d'exécution, perspectives 3D : je prends en charge l'ensemble de la chaîne de conception, du premier croquis aux pièces graphiques réglementaires. Vos dossiers arrivent formatés, numérotés, prêts à l'instruction.</p>
+    </div>
+    <div class="valeur-card">
+      <span class="valeur-icon">⏱️</span>
+      <h3>APS en 48 h — PC complet en 7 jours ouvrés</h3>
+      <p>Votre client n'a pas de temps à perdre. Vous non plus. Mes délais sont affichés, mes engagements sont tenus. Vous recevez une date de livraison dès le versement de l'acompte.</p>
+    </div>
+    <div class="valeur-card">
+      <span class="valeur-icon">💶</span>
+      <h3>Coût transparent, zéro surprise</h3>
+      <p>Grille tarifaire affichée en ligne. Pas de frais cachés, pas de dépassement non validé. Je facture en HT, TVA non applicable (article 293 B CGI). Micro-entrepreneur = structure légère = tarifs compétitifs.</p>
+    </div>
+    <div class="valeur-card">
+      <span class="valeur-icon">🔒</span>
+      <h3>Confidentialité et anonymisation garanties</h3>
+      <p>Chaque mission est couverte par notre Charte de Sous-Traitance. Vos clients finaux restent les vôtres. Je travaille dans l'ombre, vous livrez sous votre marque.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BLOC 3 : GALERIE SLIDES -->
+<section class="gallery-section">
+  <p class="section-label" style="color:var(--texte-leger);">Supports de présentation</p>
+  <h2 class="section-title">L'externalisation au service des pros</h2>
+  <p class="section-intro" style="margin-bottom:1.5rem;">Externalisation technique, parcours projet structuré, dossiers administratifs complets — cliquez sur une slide pour l'agrandir.</p>
+  <span style="display:inline-block;background:var(--beige);color:var(--bleu);font-size:11px;letter-spacing:2px;padding:4px 12px;text-transform:uppercase;margin-bottom:1.5rem;">6 slides · Cliquer pour agrandir</span>
+  <div>
+    <div class="slide-row">
+      <div class="slide-thumb" onclick="openLightbox(0)"><img src="images/professionnels-hero-01-ee6faca1.jpg" alt="Optimisez vos Projets"></div>
+      <div class="slide-thumb" onclick="openLightbox(1)"><img src="images/professionnels-hero-02-59e7172a.jpg" alt="Votre Parcours de Projet en 4 phases"></div>
+      <div class="slide-thumb" onclick="openLightbox(2)"><img src="images/professionnels-hero-03-a8c44657.jpg" alt="Composition d'un Dossier PC Complet"></div>
+    </div>
+    <div class="slide-row">
+      <div class="slide-thumb" onclick="openLightbox(3)"><img src="images/professionnels-hero-04-6f020165.jpg" alt="Villa avec jardin japonais (vue 1)"></div>
+      <div class="slide-thumb" onclick="openLightbox(4)"><img src="images/professionnels-hero-05-5a72f59d.jpg" alt="Villa avec jardin japonais (vue 2)"></div>
+      <div class="slide-thumb" onclick="openLightbox(5)"><img src="images/professionnels-hero-06-7406d6d4.jpg" alt="Plan 3D étage"></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BLOC 6 : FAQ B2B -->
+<section class="faq-section">
+  <p class="section-label">Vos questions</p>
+  <h2 class="section-title">FAQ Professionnels</h2>
+  <p class="section-intro">Les objections les plus fréquentes des MOE et constructeurs — et mes réponses directes.</p>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Vous êtes autonome ?</div>
+    <div class="faq-answer">Oui. Je travaille seul, sans structure lourde. C'est précisément ce qui me permet d'être rapide et de maintenir des tarifs compétitifs. Chaque dossier est traité par moi directement.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Quel logiciel utilisez-vous ?</div>
+    <div class="faq-answer">Je livre en DWG (compatible AutoCAD) et en PDF haute résolution. Indiquez-moi vos préférences de format au moment de la commande.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Que se passe-t-il si le PC est refusé ?</div>
+    <div class="faq-answer">Je m'engage sur la conformité réglementaire de mes dossiers (analyse PLU, consultation préventive incluse). En cas de modification demandée par le service instructeur pour un motif lié à un élément que j'ai produit, je corrige sans facturation supplémentaire.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Pouvez-vous absorber plusieurs dossiers en même temps ?</div>
+    <div class="faq-answer">Oui, sous réserve de planning. Je vous communique ma disponibilité avant chaque commande. Mon engagement : un délai ferme confirmé à la réception de l'acompte.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">Êtes-vous couvert en responsabilité ?</div>
+    <div class="faq-answer">Oui, RC Pro active auprès de [Nom assureur]. Les détails sont disponibles dans notre Charte de Sous-Traitance, transmise à la première commande.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BLOC 7 : CTA FINAL -->
+<section class="cta-section">
+  <h2>Un pic d'activité ? Un dossier en attente ?</h2>
+  <p>Premier échange offert · Devis sous 24 h · Engagement sur délai ferme dès l'acompte</p>
+  <a class="btn-primary" href="contact.html">Parlons de votre projet →</a>
+  <a class="btn-secondary" href="offre-tarifs.html" style="margin-left:12px;">Consulter les tarifs</a>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="lb-close" onclick="closeLightbox()">×</span>
+  <span class="lb-prev" onclick="changeSlide(-1)">&#8249;</span>
+  <img id="lb-img" src="" alt="">
+  <div class="lightbox-label" id="lb-label"></div>
+  <div class="lightbox-counter" id="lb-counter"></div>
+  <span class="lb-next" onclick="changeSlide(1)">&#8250;</span>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Stéphane Hervé</div>
+    <div class="footer-tagline">Conception architecturale et création d'univers visuels</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="particuliers.html">Particuliers</a>
+    <a href="professionnels.html">Professionnels</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const slides = [
+    {src: "images/professionnels-01-optimisez-vos-projets-lexternalisation-a.jpg", label: "Optimisez vos Projets — L'Externalisation au Service des Pros"},
+    {src: "images/professionnels-02-votre-parcours-de-projet-en-4-phases.jpg", label: "Votre Parcours de Projet en 4 phases"},
+    {src: "images/professionnels-03-composition-dun-dossier-pc-complet.jpg", label: "Composition d'un Dossier PC Complet"},
+    {src: "images/professionnels-04-réalisation-villa-avec-jardin-japonais-v.jpg", label: "Réalisation — Villa avec jardin japonais (vue 1)"},
+    {src: "images/professionnels-05-réalisation-villa-avec-jardin-japonais-v.jpg", label: "Réalisation — Villa avec jardin japonais (vue 2)"},
+    {src: "images/professionnels-06-réalisation-plan-3d-étage.jpg", label: "Réalisation — Plan 3D étage"},
+  ];
+  let current = 0;
+  function openLightbox(idx) { current = idx; showSlide(); document.getElementById('lightbox').classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow = ''; }
+  function showSlide() {
+    document.getElementById('lb-img').src = slides[current].src;
+    document.getElementById('lb-img').alt = slides[current].label;
+    document.getElementById('lb-label').textContent = slides[current].label;
+    document.getElementById('lb-counter').textContent = (current + 1) + ' / ' + slides.length;
+  }
+  function changeSlide(dir) { current = (current + dir + slides.length) % slides.length; showSlide(); }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') changeSlide(1);
+    if (e.key === 'ArrowLeft') changeSlide(-1);
+    if (e.key === 'Escape') closeLightbox();
+  });
+  document.getElementById('lightbox').addEventListener('click', e => { if (e.target === e.currentTarget) closeLightbox(); });
+
+  function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+</script>
+</body>
+</html>
