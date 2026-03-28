@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réalisations — Stéphane Hervé AcA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --bleu:#1a2a4a; --beige:#b8a98a; --bleu-moyen:#1e5273; --fond:#f7f5f1; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Jost',sans-serif; background:var(--fond); }
+
+    .page-header { background:var(--bleu); padding:1.5rem 3rem; display:flex; align-items:center; justify-content:space-between; }
+    .back-btn { color:var(--beige); text-decoration:none; font-size:13px; letter-spacing:2px; text-transform:uppercase; }
+    .back-btn:hover { color:#fff; }
+    .page-header h1 { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:#fff; }
+
+    .hero { background:linear-gradient(135deg,var(--bleu) 0%,var(--bleu-moyen) 100%); padding:4rem 3rem 3rem; text-align:center; position:relative; overflow:hidden; }
+    .hero::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .hero h2 { font-family:'Cormorant Garamond',serif; font-size:3.5rem; font-weight:300; color:#fff; margin-bottom:1rem; position:relative; }
+    .hero h2 em { color:var(--beige); font-style:italic; }
+    .hero p { color:rgba(255,255,255,.7); font-size:15px; font-weight:300; max-width:600px; margin:0 auto; line-height:1.8; position:relative; }
+    .hero-line { width:60px; height:1px; background:var(--beige); margin:1.5rem auto; }
+
+    .section-label { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--beige); margin-bottom:1rem; }
+    .section-titre { font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-weight:300; color:var(--bleu); margin-bottom:2.5rem; border-bottom:1px solid #ddd; padding-bottom:1.5rem; }
+
+    /* ── VEDETTE ── */
+    .section-vedette { max-width:1200px; margin:4rem auto 0; padding:0 2rem; }
+    .projet-vedette { display:grid; grid-template-columns:1.4fr 1fr; gap:3rem; margin-bottom:4rem; align-items:start; }
+    @media(max-width:900px){ .projet-vedette{ grid-template-columns:1fr; } }
+    .vedette-visuel { position:relative; }
+    .vedette-img-principale { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; cursor:pointer; }
+    .vedette-galerie { display:grid; grid-template-columns:repeat(3,1fr); gap:.8rem; margin-top:.8rem; }
+    .vedette-galerie img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; cursor:pointer; transition:opacity .2s; }
+    .vedette-galerie img:hover { opacity:.85; }
+    .vedette-info { padding-top:.5rem; }
+    .projet-nom { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:var(--bleu); margin-bottom:.5rem; }
+    .projet-sous-titre { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--beige); margin-bottom:1.5rem; }
+    .projet-desc { font-size:14px; color:#555; font-weight:300; line-height:1.9; margin-bottom:2rem; }
+    .meta-liste { list-style:none; }
+    .meta-liste li { display:flex; gap:1rem; border-bottom:1px solid #ede9e3; padding:.8rem 0; font-size:13px; }
+    .meta-cle { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--beige); min-width:110px; padding-top:2px; flex-shrink:0; }
+    .meta-val { color:#444; font-weight:300; }
+
+    .separateur { max-width:1200px; margin:0 auto 3rem; padding:0 2rem; }
+    .separateur hr { border:none; border-top:1px solid #ddd; }
+
+    /* ── BANNIÈRES PLEINE LARGEUR (photos 1 et 10) ── */
+    .section-projets { max-width:1200px; margin:0 auto 5rem; padding:0 2rem; }
+
+    .banner-card { margin-bottom:2rem; background:#fff; overflow:hidden; cursor:pointer; transition:box-shadow .25s; }
+    .banner-card:hover { box-shadow:0 8px 32px rgba(26,42,74,.15); }
+    .banner-card img { width:100%; height:520px; object-fit:cover; object-position:top; display:block; }
+    .banner-card-body { padding:1.4rem 1.8rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; }
+    .banner-card-body .left .projet-card-type { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--beige); margin-bottom:.3rem; }
+    .banner-card-body .left .projet-card-nom { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:400; color:var(--bleu); }
+    .banner-card-body .projet-card-desc { font-size:13px; color:#777; font-weight:300; line-height:1.7; max-width:500px; }
+
+    /* ── GRILLE 3 COL 16/9 ── */
+    .projets-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+    @media(max-width:900px){ .projets-grid{ grid-template-columns:1fr 1fr; } }
+    @media(max-width:600px){ .projets-grid{ grid-template-columns:1fr; } }
+
+    .projet-card { background:#fff; overflow:hidden; transition:box-shadow .25s; cursor:pointer; }
+    .projet-card:hover { box-shadow:0 8px 32px rgba(26,42,74,.12); }
+    .projet-card img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
+    .projet-card-body { padding:1.4rem; }
+    .projet-card-type { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--beige); margin-bottom:.4rem; }
+    .projet-card-nom { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:400; color:var(--bleu); margin-bottom:.5rem; }
+    .projet-card-desc { font-size:13px; color:#777; font-weight:300; line-height:1.7; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:9999; align-items:center; justify-content:center; }
+    .lightbox.open { display:flex; }
+    .lightbox img { max-width:90vw; max-height:90vh; object-fit:contain; }
+    .lightbox-close { position:absolute; top:1.5rem; right:2rem; color:#fff; font-size:2.5rem; cursor:pointer; line-height:1; }
+
+    /* ── CTA ── */
+    .cta-section { background:var(--bleu); padding:4rem 2rem; text-align:center; }
+    .cta-section h3 { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:#fff; margin-bottom:1rem; }
+    .cta-section h3 em { color:var(--beige); font-style:italic; }
+    .cta-section p { color:rgba(255,255,255,.6); font-size:14px; font-weight:300; margin-bottom:2rem; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.8; }
+    .cta-btn { display:inline-block; background:var(--beige); color:#fff; padding:14px 44px; text-decoration:none; font-size:12px; letter-spacing:3px; text-transform:uppercase; transition:background .2s; }
+    .cta-btn:hover { background:#a0907a; }
+    .page-footer { background:var(--bleu); border-top:1px solid rgba(255,255,255,.05); padding:2rem 3rem; text-align:center; color:rgba(255,255,255,.4); font-size:11px; letter-spacing:1px; }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="stephane-herve-site.html" class="back-btn">← Retour au site</a>
+    <h1>Réalisations</h1>
+    <span style="color:var(--beige);font-size:12px;letter-spacing:2px;">AcA</span>
+  </header>
+
+  <div class="hero">
+    <h2>Projets <em>réalisés</em></h2>
+    <div class="hero-line"></div>
+    <p>Une sélection de créations architecturales et d'aménagements — chaque projet, une vision traduite en espace.</p>
+  </div>
+
+  <!-- PROJET VEDETTE -->
+  <div class="section-vedette">
+    <p class="section-label">À la une</p>
+    <h2 class="section-titre">Projet mis en lumière</h2>
+    <div class="projet-vedette">
+      <div class="vedette-visuel">
+        <img src="images/realisations-hero-01-cac4260e.jpg" class="vedette-img-principale" alt="Maison contemporaine" onclick="openLB(this.src)">
+        <div class="vedette-galerie">
+          <img src="images/realisations-hero-02-829d04d9.jpg" alt="Maison contemporaine" onclick="openLB(this.src)">
+          <img src="images/realisations-hero-03-d75bd00b.jpg" alt="Maison contemporaine" onclick="openLB(this.src)">
+          <img src="images/realisations-hero-04-eccae73a.jpg" alt="Maison contemporaine" onclick="openLB(this.src)">
+        </div>
+      </div>
+      <div class="vedette-info">
+        <p class="projet-sous-titre">Maison individuelle — Conception architecturale</p>
+        <h3 class="projet-nom">Maison contemporaine terrain pentu</h3>
+        <p class="projet-desc">Maison contemporaine sur terrain pentu.</p>
+        <ul class="meta-liste">
+          <li><span class="meta-cle">Prestation</span><span class="meta-val">Conception architecturale complète — APS / Plans d'exécution</span></li>
+          <li><span class="meta-cle">Type</span><span class="meta-val">Maison individuelle neuve</span></li>
+          <li><span class="meta-cle">Dossier</span><span class="meta-val">Permis de construire</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="separateur"><hr></div>
+
+  <!-- GRILLE PROJETS -->
+  <div class="section-projets">
+    <p class="section-label">Autres réalisations</p>
+    <h2 class="section-titre">Projets architecturaux &amp; aménagements</h2>
+
+    <!-- BANNIÈRE photo 1 — pleine largeur -->
+    <div class="banner-card" onclick="openLB(this.querySelector('img').src)">
+      <img src="images/realisations-hero-05-v2.jpg" alt="Maison contemporaine">
+      <div class="banner-card-body">
+        <div class="left">
+          <p class="projet-card-type">Maison individuelle</p>
+          <h3 class="projet-card-nom">Maison MOB contemporaine PASSIVE</h3>
+        </div>
+        <!-- Modifier ce commentaire descriptif -->
+        <p class="projet-card-desc">Installation photovoltaïque 9 kva — Panneaux thermiques — Récupération de calories — Couloir de rétention de calories</p>
+      </div>
+    </div>
+
+    <!-- GRILLE 3 colonnes -->
+    <div class="projets-grid" style="margin-bottom:2rem;">
+
+      <div class="projet-card" onclick="openLB(this.querySelector('img').src)">
+        <img src="images/realisations-hero-06-3ee84a5d.jpg" alt="Maison contemporaine">
+        <div class="projet-card-body">
+          <p class="projet-card-type">Maison individuelle</p>
+          <h3 class="projet-card-nom">Maison contemporaine</h3>
+          <!-- Modifier ce commentaire descriptif -->
+          <p class="projet-card-desc">Maison contemporaine.</p>
+        </div>
+      </div>
+
+      <div class="projet-card" onclick="openLB(this.querySelector('img').src)">
+        <img src="images/realisations-hero-07-v2.jpg" alt="Maison contemporaine">
+        <div class="projet-card-body">
+          <p class="projet-card-type">Maison individuelle</p>
+          <h3 class="projet-card-nom">Maison contemporaine</h3>
+          <!-- Modifier ce commentaire descriptif -->
+          <p class="projet-card-desc">Maison contemporaine.</p>
+        </div>
+      </div>
+
+      <div class="projet-card" onclick="openLB(this.querySelector('img').src)">
+        <img src="images/realisations-hero-08-v2.jpg" alt="Maison contemporaine">
+        <div class="projet-card-body">
+          <p class="projet-card-type">Maison individuelle</p>
+          <h3 class="projet-card-nom">Maison contemporaine</h3>
+          <!-- Modifier ce commentaire descriptif -->
+          <p class="projet-card-desc">Maison contemporaine.</p>
+        </div>
+      </div>
+
+      <div class="projet-card" onclick="openLB(this.querySelector('img').src)">
+        <img src="images/realisations-hero-09-c49ddfbb.jpg" alt="Maison contemporaine">
+        <div class="projet-card-body">
+          <p class="projet-card-type">Maison individuelle</p>
+          <h3 class="projet-card-nom">Maison traditionnelle, mix enduit et parement brique</h3>
+          <!-- Modifier ce commentaire descriptif -->
+          <p class="projet-card-desc">Maison contemporaine.</p>
+        </div>
+      </div>
+
+      <div class="projet-card" onclick="openLB(this.querySelector('img').src)">
+        <img src="images/realisations-hero-10-v2.jpg" alt="Maison contemporaine">
+        <div class="projet-card-body">
+          <p class="projet-card-type">Maison individuelle</p>
+          <h3 class="projet-card-nom">Maison traditionnelle double pans</h3>
+          <!-- Modifier ce commentaire descriptif -->
+          <p class="projet-card-desc">Maison contemporaine.</p>
+        </div>
+      </div>
+
+      <div class="projet-card" onclick="openLB(this.querySelector('img').src)">
+        <img src="images/realisations-hero-11-7797d11f.jpg" alt="Maison contemporaine">
+        <div class="projet-card-body">
+          <p class="projet-card-type">Maison individuelle</p>
+          <h3 class="projet-card-nom">Maison contemporaine</h3>
+          <!-- Modifier ce commentaire descriptif -->
+          <p class="projet-card-desc">Maison contemporaine.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BANNIÈRE photo 10 — pleine largeur -->
+    <div class="banner-card" onclick="openLB(this.querySelector('img').src)">
+      <img src="images/realisations-hero-12-b36402af.jpg" alt="Maison contemporaine">
+      <div class="banner-card-body">
+        <div class="left">
+          <p class="projet-card-type">Maison individuelle</p>
+          <h3 class="projet-card-nom">Maison contemporaine 250 m², imbrication de cubes, mix enduit zinc</h3>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h3>Votre projet mérite une <em>vision unique</em></h3>
+    <p>Discutons de vos envies, vos contraintes, votre terrain — et construisons ensemble la réponse architecturale qui vous ressemble.</p>
+    <a href="contact.html" class="cta-btn">Prendre contact</a>
+  </div>
+
+  <div class="page-footer">
+    &copy; Stéphane Hervé — AcA Atelier Conception Architecturale &amp; Univers Visuels
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLB()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lb-img" src="" alt="">
+  </div>
+
+  <script>
+    function openLB(src) {
+      document.getElementById('lb-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLB() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeLB(); });
+  </script>
+
+</body>
+</html>
